@@ -17,3 +17,5 @@ Now you have an executable file name like tlds-1.0.0-SNAPSHOT.jar in the target 
 
  * java -jar <path-to-tlds>/target/tlds-1.0.0-SNAPSHOT.jar swissgeo-config.ttl
 
+ Acces for example: http://localhost:5000/boundaries/municipality/261:2016
+
