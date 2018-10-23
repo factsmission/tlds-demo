@@ -1,4 +1,211 @@
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix r2h: <http://rdf2h.github.io/2015/rdf2h#> .
+@prefix dc: <http://dublincore.org/2012/06/14/dcelements#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix s: <http://schema.org/> .
+@prefix geoch: <https://ld.geo.admin.ch/def/> .
+@prefix opengis: <http://www.opengis.net/ont/geosparql#> .
 
-<> rdfs:comment "Some demo renderers".
+<genericResource> a r2h:Renderer;
+    r2h:type rdfs:Resource;
+    r2h:context r2h:Default-Naked;
+    r2h:javaScript """
+        var prefixMappings = [{ns: "http://schema.org/", prefix: "s:"},
+                        {ns: "http://www.w3.org/1999/02/22-rdf-syntax-ns#", prefix: "rdf:"},
+                        {ns: "https://gont.ch/", prefix: "gont:"},
+                        {ns: "http://www.w3.org/2004/02/skos/core#", prefix: "skos:"},
+                        {ns: "http://www.w3.org/2002/07/owl#", prefix: "owl:"},
+                        {ns: "http://dbpedia.org/resource/", prefix: "dbr:"},
+                        {ns: "http://dbpedia.org/class/yago/", prefix: "yago:"},
+                        {ns: "http://xmlns.com/foaf/0.1/", prefix: "foaf:"},
+                        {ns: "http://www.wikidata.org/entity/", prefix: "wikidata:"},
+                        {ns: "http://dbpedia.org/ontology/", prefix: "dbo:"},
+                        {ns: "http://pns.org/dc/terms/", prefix: "dct:"},
+                        {ns: "http://www.w3.org/2000/01/rdf-schema#", prefix: "rdfs:"}];
+        function styleUri(uri) {
+            var mapping = prefixMappings.find(function(mappping) {
+                return uri.startsWith(mappping.ns);
+            });
+            if (mapping) {
+                return mapping.prefix+"<b>"+uri.substring(mapping.ns.length)+"</b>";
+            } else {
+                return uri;
+            }
+        }
+        var result = "";
+        var predicatesArray = [];
+        var nodesToRender = [];
+        //should rather attach this to something specific to this RDF2h invocation
+        console.log(env);
+		if (!env.renderedNodesToId)  {
+			env.renderedNodesToId = new Object();
+		}
+
+    """
+.
+
+
+
+
+[ a       <http://rdf2h.github.io/2015/rdf2h#Renderer> ;
+<http://www.w3.org/2000/01/rdf-schema#comment>
+        "Renders a full page, delegating to renderers in the default \n    context for the body, and to gt:HtmlHead for things like the html title" ;
+<http://rdf2h.github.io/2015/rdf2h#context>
+        <http://rdf2h.github.io/2016/generic-rdf2h-renderers/FullPage> ;
+<http://rdf2h.github.io/2015/rdf2h#mustache>
+        """
+        {{{@prefix r2h: <http://rdf2h.github.io/2015/rdf2h#>}}}
+        {{{@prefix gt: <http://rdf2h.github.io/2016/generic-rdf2h-Renderers/>}}}
+        {{{@prefix s: <http://schema.org/>}}}
+            <head>
+              <link rel='stylesheet' href='http://localhost:8080/style.css' />
+              <title>{{.}}</title>
+              <style></style>
+            </head>
+            <body>
+              <header>
+                <h1>A new dress to geo.admin.ch</h1>
+                <h2 class='subheader'>Proudly turtle configurated</h2>
+              </header>
+              <div class='content'>
+                {{{:render . r2h:Default}}}
+              </div>
+            </body>""" ;
+<http://rdf2h.github.io/2015/rdf2h#type>
+        <http://www.w3.org/2000/01/rdf-schema#Resource>
+] .
+
+[ a       <http://rdf2h.github.io/2015/rdf2h#Renderer> ;
+  <http://rdf2h.github.io/2015/rdf2h#context>
+          <http://rdf2h.github.io/2015/rdf2h#Tail> ;
+  <http://rdf2h.github.io/2015/rdf2h#mustache>
+          "\n   {{{@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>}}}\n    {{#+rdfs:seeAlso}}\n      <div class=\"seeAlso\">\n        See also:\n        <ul>\n          {{#rdfs:seeAlso}}\n            <li>\n              <a href=\"{{{.}}}\">{{.}}</a>\n            </li>\n          {{/rdfs:seeAlso}}\n        </ul>\n      </div>\n    {{/+rdfs:seeAlso}}\n    {{#+rdfs:seeAlso<-}}\n      <div class=\"seeAlso\">\n        Inverse see also:\n        <ul>\n          {{#rdfs:seeAlso<-}}\n            <li>\n              <a href=\"{{{.}}}\">{{.}}</a>\n            </li>\n          {{/rdfs:seeAlso<-}}\n        </ul>\n      </div>\n    {{/+rdfs:seeAlso<-}}\n    " ;
+  <http://rdf2h.github.io/2015/rdf2h#type>
+          <http://schema.org/Article>
+] .
+
+
+[ a r2h:Renderer;
+    r2h:type 	s:AdministrativeArea , opengis:Feature ;
+    r2h:context r2h:Default ;
+    r2h:mustache """
+        <ul>
+        {{{#opengis:hasGeometry}}}
+            {{ . }}
+            <br/>
+            Rendered: {{{ :renderer . }}}
+        {{{/opengis:hasGeometry}}}
+        </ul>
+        """
+].
+
+[ a r2h:Renderer;
+    r2h:type opengis:Geometry ;
+    r2h:context r2h:Default ;
+    r2h:mustache """
+        Shape is {{{<http://www.opengis.net/ont/geosparql#asWKT>}}}
+        """
+].
+
+[ a r2h:Renderer ;
+    r2h:type s:Country ;
+    r2h:context r2h:Default ;
+    r2h:javaScript """
+    var prefixMappings = [{ns: "http://schema.org/", prefix: "s:"},
+                    {ns: "http://www.w3.org/1999/02/22-rdf-syntax-ns#", prefix: "rdf:"},
+                    {ns: "https://gont.ch/", prefix: "gont:"},
+                    {ns: "http://www.w3.org/2004/02/skos/core#", prefix: "skos:"},
+                    {ns: "http://www.w3.org/2002/07/owl#", prefix: "owl:"},
+                    {ns: "http://dbpedia.org/resource/", prefix: "dbr:"},
+                    {ns: "http://dbpedia.org/class/yago/", prefix: "yago:"},
+                    {ns: "http://xmlns.com/foaf/0.1/", prefix: "foaf:"},
+                    {ns: "http://www.wikidata.org/entity/", prefix: "wikidata:"},
+                    {ns: "http://dbpedia.org/ontology/", prefix: "dbo:"},
+                    {ns: "http://pns.org/dc/terms/", prefix: "dct:"},
+                    {ns: "http://www.w3.org/2000/01/rdf-schema#", prefix: "rdfs:"}];
+    function styleUri(uri) {
+        var mapping = prefixMappings.find(function(mappping) {
+            return uri.startsWith(mappping.ns);
+        });
+        if (mapping) {
+            return mapping.prefix+"<b>"+uri.substring(mapping.ns.length)+"</b>";
+        } else {
+            return uri;
+        }
+    }
+    var result = "";
+    var predicatesArray = [];
+    var nodesToRender = [];
+    //should rather attach this to something specific to this RDF2h invocation
+    if (!env.renderedNodesToId)  {
+      env.renderedNodesToId = new Object();
+    }
+
+    var node = n.node;
+    var s = n.graph.match(node, undefined, undefined);
+
+    if (s.length > 0) {
+       env.renderedNodesToId[node.toString()] = true;
+       result += '<div id="'+node+'"><table width="100%">';
+       s.forEach(function(t) {
+        var objectHtml;
+        var prefix = "";
+        var predicate = t.predicate.value;
+        console.log(t.object)
+        if (t.object.datatype === undefined) {
+            nodesToRender.push(t.object);
+            if (t.object.termType == "BlankNode") {
+                objectHtml = '<div class="moving"></div><a href="#" onclick=\\'document.getElementById(\"'+
+                    t.object+'").scrollIntoView( true );return false;\\'>'+t.object.toString()+'</a>';
+            } else {
+                var objectPrefix = "";
+                if ( predicate == 'http://schema.org/hasMap') {
+                    var embedMap = t.object.value.replace('map.geo.admin.ch/', 'map.geo.admin.ch/embed.html');
+                    objectHtml = '<iframe src="' + embedMap + '" style="width:100%; height: 400px; border: 0;"></iframe>' + "<br/>";
+                } else {
+                    var object = t.object.value.replace(/&/g,"&amp;");
+                    objectHtml = '<a href="'+object+'" title="'+object+'">'+styleUri(object)+'</a>';
+                }
+            }
+        } else {
+            objectHtml = t.object.value + ' (<a href="' + t.object.datatype.value + '" >' + t.object.datatype.value.split('#')[1] + "</a>) " ;
+        }
+        var isNew = true;
+        for (var i = 0; i < predicatesArray.length; i++) {
+            if (predicatesArray[i] === predicate) {
+                isNew = false;
+                break;
+            }
+        }
+        predicatesArray.push(predicate);
+
+        result += '<tr><td width="40%">'+
+            '<a href="'+predicate+'" title="'+predicate+'" style="color:#000000;text-decoration:none">'+
+            styleUri(predicate)+'</a></td><td width="60%">'+
+            objectHtml+'</td>';
+
+        });
+       result += '</table><hr></div>';
+    };
+    while (nodesToRender.length > 0) {
+        var subNode = nodesToRender.pop().value;
+        console.log('subnode', subNode)
+        if ((n.graph.match(subNode, undefined, undefined).length > 0) &&
+            (!env.renderedNodesToId[subNode.toString()])) {
+    result += render(GraphNode(subNode, n.graph), $rdf.sym("http://rdf2h.github.io/2015/rdf2h#Default"));
+        }
+    }
+    console.log("getting subjects for"+node);
+    console.log(node)
+    var backwardLinks = n.graph.match(undefined, undefined, node);
+    backwardLinks.forEach(function(t) {
+        var subjectNode = t.subject.value;
+        console.log(subjectNode);
+        if (!env.renderedNodesToId[subjectNode.toString()]) {
+            result += render(GraphNode(subjectNode, n.graph), $rdf.sym("http://rdf2h.github.io/2015/rdf2h#Default"));
+        }
+    })
+    return result;
+    """
+] .
