@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: Titillium Text;
+	src: url('/style/fonts/TitilliumText25L003.otf') format("opentype");
+}
+
+@font-face {
+	font-family: Titillium Title;
+	src: url('/style/fonts/TitilliumTitle20.otf') format("opentype");
+
+}
+
+@font-face {
+	font-family: Titillium Bold;
+	src: url('/style/fonts/TitilliumText25L001.otf') format("opentype");
+
+}
+
+* {
+    font-family: 'Titillium Text', sans-serif;
+}
+
+a {
+    color: #98bf0e;
+    text-decoration: none;
+}
+
+h1 {
+    size: 3em;
+}
+
+h2 {
+    size: 2em;
+}
+
+header {
+    padding: 1em auto;
+    background-color: #98bf0e;
+    color: #ffffff;
+}
+
+hr {
+    border: 1px solid #98bf0e;
+}
+body {
+	background-color: lightgrey;
+}
+
+.content {
+		padding: 2em;
+		background-color: white;
+		border-radius: 10px;
+    margin: 2em auto;
+    max-width: 90%;
+    width: 1000px;
+    size: 1em;
+}
+
+.subheader {
+    color: rgba(255,255,255,70%)
+}
+
+.seeAlso {
+    margin-top: 10pt;
+}
