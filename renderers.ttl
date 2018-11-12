@@ -85,16 +85,15 @@
           <http://schema.org/Article>
 ] .
 
-
 [ a r2h:Renderer;
     r2h:type 	s:AdministrativeArea , opengis:Feature ;
     r2h:context r2h:Default ;
     r2h:mustache """
         <ul>
         {{{#opengis:hasGeometry}}}
-            {{ . }}
+            {{.}}
             <br/>
-            Rendered: {{{ :renderer . }}}
+            Rendered: {{{:render .}}}
         {{{/opengis:hasGeometry}}}
         </ul>
         """
@@ -103,8 +102,8 @@
 [ a r2h:Renderer;
     r2h:type opengis:Geometry ;
     r2h:context r2h:Default ;
-    r2h:mustache """
-        Shape is {{{<http://www.opengis.net/ont/geosparql#asWKT>}}}
+    r2h:mustache """{{@prefix gs: <http://www.opengis.net/ont/geosparql>}}
+        Shape is {{{gs:asWKT}}}
         """
 ].
 
