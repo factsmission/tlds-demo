@@ -5,7 +5,7 @@
 <>
     slds:port 5000 ;
     slds:sparqlEndpoint <https://ld.geo.admin.ch/query> ;
-    tlds:renderers ("https://rdf2h.github.io/renderers/0.0.2/fallback-renderers.ttl" "https://rawgit.com/rdf2h/renderers/master/schema-org-renderers.ttl" "http://localhost:8080/renderers.ttl");
+    tlds:renderers ("http://localhost:8080/renderers.ttl");
     slds:enableVituosoWorkAround true;
     slds:iriTranslators (
         [
