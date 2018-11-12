@@ -59,17 +59,25 @@
         {{{@prefix gt: <http://rdf2h.github.io/2016/generic-rdf2h-Renderers/>}}}
         {{{@prefix s: <http://schema.org/>}}}
             <head>
-              <link rel='stylesheet' href='http://localhost:8080/style.css' />
+              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"/>
+              <!--<link rel='stylesheet' href='http://localhost:8080/style.css' />-->
               <title>{{.}}</title>
               <style></style>
             </head>
             <body>
-              <header>
-                <h1>A new dress to geo.admin.ch</h1>
-                <h2 class='subheader'>Proudly turtle configurated</h2>
-              </header>
-              <div class='content'>
-                {{{:render . r2h:Default}}}
+              <div class="ui container">
+                <header>
+                  <div class="ui two column stackable grid">
+                    <div class="three wide middle aligned column"><img class="ui middle aligned image" src="https://www.geo.admin.ch/etc/clientlibs/cmsms-core-common/img/logo-CH.svg" onerror="this.onerror=null; this.src='https://www.geo.admin.ch/etc/clientlibs/cmsms-core-common/img/logo-CH.png'"></div>
+                    <div class="ten wide column">
+                      <h1>A new dress to geo.admin.ch</h1>
+                      <h2 class='subheader'>Proudly turtle configurated</h2>
+                    </div>
+                  </div>
+                </header>
+                <div class="two column stackable grid">
+                  {{{:render . r2h:Default}}}
+                </div>
               </div>
             </body>""" ;
 <http://rdf2h.github.io/2015/rdf2h#type>
@@ -88,13 +96,9 @@
 [ a r2h:Renderer;
     r2h:type 	s:AdministrativeArea , opengis:Feature ;
     r2h:context r2h:Default ;
-    r2h:mustache """
+    r2h:mustache """{{@prefix gs: <http://www.opengis.net/ont/geosparql#>}}
         <ul>
-        {{{#opengis:hasGeometry}}}
-            {{.}}
-            <br/>
-            Rendered: {{{:render .}}}
-        {{{/opengis:hasGeometry}}}
+        {{.}}
         </ul>
         """
 ].
@@ -102,7 +106,7 @@
 [ a r2h:Renderer;
     r2h:type opengis:Geometry ;
     r2h:context r2h:Default ;
-    r2h:mustache """{{@prefix gs: <http://www.opengis.net/ont/geosparql>}}
+    r2h:mustache """{{@prefix gs: <http://www.opengis.net/ont/geosparql#>}}
         Shape is {{{gs:asWKT}}}
         """
 ].
