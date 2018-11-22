@@ -118,6 +118,23 @@
     r2h:mustache """{{@prefix geo: <http://www.geonames.org/ontology#>}}
       {{@prefix rdf: <http://www.w3.org/2000/01/rdf-schema#>}}
       {{@prefix dc: <http://purl.org/dc/terms/>}}
+      {{@prefix s: <http://schema.org/>}}
+      {{@prefix opengis: <http://www.opengis.net/ont/geosparql#>}}
+
+      {{#+s:hasMap}}
+      {{{:render . opengis:FeatureMap}}}
+      {{/+s:hasMap}}
+
+      {{#+s:name}}
+      <div class="two column row">
+        <div class="column">
+          <p>has name:</p>
+        </div>
+        <div class="column">
+          <p><b>{{{s:name}}}</b></p>
+        </div>
+      </div>
+      {{/+s:name}}
 
       {{#+geo:countryCode}}
       <div class="two column row">
@@ -141,15 +158,47 @@
       </div>
       {{/+rdf:seeAlso}}
 
-      {{#+dc:hasVersion}}
+      {{#dc:hasVersion}}
       <div class="two column row">
         <div class="column">
           <p>Has Version:</p>
         </div>
         <div class="column">
-          <p><b>{{{dc:hasVersion}}}</b></p>
+          <p><b><a href="{{{.}}}">{{{:render . opengis:Feature}}}</a></b></p>
         </div>
       </div>
-      {{/+dc:hasVersion}}
+      {{/dc:hasVersion}}
+
+
+      {{#dc:isVersionOf}}
+      <div class="two column row">
+        <div class="column">
+          <p>Has Version:</p>
+        </div>
+        <div class="column">
+          <p><b><a href="{{{.}}}">{{{dc:isVersionOf->s:name}}}</a></b></p>
+        </div>
+      </div>
+      {{/dc:isVersionOf}}
       """
 ] .
+
+[ a r2h:Renderer ;
+    r2h:type rdfs:Resource ;
+    r2h:context opengis:Feature ;
+    r2h:mustache """{{@prefix s: <http://schema.org/>}}
+	  {{{+s:name}}}
+    """
+].
+
+
+[ a r2h:Renderer ;
+    r2h:type rdfs:Resource ;
+    r2h:context opengis:FeatureMap ;
+    r2h:javaScript """
+    let s = suffix => $rdf.sym("http://schema.org/"+suffix);
+    let map = n.out(s("hasMap")).value.replace('https://map.geo.admin.ch/', 'https://map.geo.admin.ch/embed.html');
+    let iframe = `<iframe src='${map}' width='940' height='400' frameborder='0' style='border:0'></iframe>`
+    print(iframe);
+    """
+].
