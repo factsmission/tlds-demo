@@ -117,9 +117,9 @@
     r2h:context r2h:Default ;
     r2h:mustache """{{@prefix geo: <http://www.geonames.org/ontology#>}}
       {{@prefix rdf: <http://www.w3.org/2000/01/rdf-schema#>}}
-      {{@prefix dc: http://purl.org/dc/terms/}}
+      {{@prefix dc: <http://purl.org/dc/terms/>}}
 
-      {{+#geo:countryCode}}
+      {{#+geo:countryCode}}
       <div class="two column row">
         <div class="column">
           <p>Country code:</p>
@@ -128,9 +128,9 @@
           <p><b>{{{geo:countryCode}}}</b></p>
         </div>
       </div>
-      {{+/geo:countryCode}}
+      {{/+geo:countryCode}}
 
-      {{+#rdf:seeAlso}}
+      {{#+rdf:seeAlso}}
       <div class="two column row">
         <div class="column">
           <p>See also:</p>
@@ -139,17 +139,17 @@
           <p><b>{{{rdf:seeAlso}}}</b></p>
         </div>
       </div>
-      {{+/rdf:seeAlso}}
+      {{/+rdf:seeAlso}}
 
-      {{+#dc:hasVersion}}
+      {{#+dc:hasVersion}}
       <div class="two column row">
         <div class="column">
           <p>Has Version:</p>
         </div>
         <div class="column">
-          <p><b>{{{.}}}<b></p>
+          <p><b>{{{dc:hasVersion}}}</b></p>
         </div>
       </div>
-      {{+/dc:hasVersion}}
+      {{/+dc:hasVersion}}
       """
 ] .
