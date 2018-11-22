@@ -1,4 +1,5 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix gt: <http://rdf2h.github.io/2016/generic-rdf2h-renderers/> .
 @prefix r2h: <http://rdf2h.github.io/2015/rdf2h#> .
 @prefix dc: <http://dublincore.org/2012/06/14/dcelements#>.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -76,10 +77,12 @@
                   </div>
                 </header>
                 <div class="ui dividing header"></div>
-                <div class="ui segment">
-                  {{{:render . r2h:Default}}}
+                  <div class="ui segment">
+                    <div class="ui vertically divided grid">
+                      {{{:render . r2h:Default}}}
+                    </div>
+                  </div>
                 </div>
-              </div>
             </body>""" ;
 <http://rdf2h.github.io/2015/rdf2h#type>
         <http://www.w3.org/2000/01/rdf-schema#Resource>
@@ -94,22 +97,59 @@
           <http://schema.org/Article>
 ] .
 
-[ a r2h:Renderer;
-    r2h:type 	s:AdministrativeArea , opengis:Feature ;
-    r2h:context r2h:Default ;
-    r2h:mustache """{{@prefix gs: <http://www.opengis.net/ont/geosparql#>}}
-        <div class="ui vertical segment">
-          {{{:render . r2h:Default}}}
-        </div>
-        """
-].
+<genericHead> a r2h:Renderer;
+    r2h:type rdfs:Resource;
+    r2h:context gt:HtmlHead;
+    r2h:mustache """
+        {{{:render . gt:HtmlTitle}}}
+    """.
+
+<genericHtmlTitle> a r2h:Renderer;
+    r2h:type rdfs:Resource;
+    r2h:context gt:HtmlTitle;
+    r2h:mustache """
+        <title>Resource: {{.}}</title>
+    """.
+
 
 [ a r2h:Renderer;
-    r2h:type opengis:Geometry ;
+    r2h:type opengis:Feature ;
     r2h:context r2h:Default ;
-    r2h:mustache """{{@prefix gs: <http://www.opengis.net/ont/geosparql#>}}
-        <div class="ui vertical segment">
-          Shape is {{{gs:asWKT}}}
+    r2h:mustache """{{@prefix geo: <http://www.geonames.org/ontology#>}}
+      {{@prefix rdf: <http://www.w3.org/2000/01/rdf-schema#>}}
+      {{@prefix dc: http://purl.org/dc/terms/}}
+
+      {{+#geo:countryCode}}
+      <div class="two column row">
+        <div class="column">
+          <p>Country code:</p>
         </div>
-        """
-].
+        <div class="column">
+          <p><b>{{{geo:countryCode}}}</b></p>
+        </div>
+      </div>
+      {{+/geo:countryCode}}
+
+      {{+#rdf:seeAlso}}
+      <div class="two column row">
+        <div class="column">
+          <p>See also:</p>
+        </div>
+        <div class="column">
+          <p><b>{{{rdf:seeAlso}}}</b></p>
+        </div>
+      </div>
+      {{+/rdf:seeAlso}}
+
+      {{+#dc:hasVersion}}
+      <div class="two column row">
+        <div class="column">
+          <p>Has Version:</p>
+        </div>
+        <div class="column">
+          <p><b>{{{.}}}<b></p>
+        </div>
+      </div>
+      {{+/dc:hasVersion}}
+      """
+] .
