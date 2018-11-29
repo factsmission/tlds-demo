@@ -66,23 +66,32 @@
               <style></style>
             </head>
             <body>
-              <div class="ui container">
-                <header>
-                  <div class="ui two column stackable grid">
-                    <div class="three wide middle aligned column"><img class="ui middle aligned image" src="https://www.geo.admin.ch/etc/clientlibs/cmsms-core-common/img/logo-CH.svg" onerror="this.onerror=null; this.src='https://www.geo.admin.ch/etc/clientlibs/cmsms-core-common/img/logo-CH.png'"></div>
-                    <div class="ten wide column">
-                      <h1>A new dress to geo.admin.ch</h1>
-                      <h2 class='subheader'>Proudly turtle configurated</h2>
-                    </div>
-                  </div>
-                </header>
-                <div class="ui dividing header"></div>
-                  <div class="ui segment">
-                    <div class="ui vertically divided grid">
-                      {{{:render . r2h:Default}}}
-                    </div>
+              <header class="ui main text container">
+                <div class="ui two column stackable grid">
+                  <div class="three wide middle aligned column"><img class="ui middle aligned image" src="https://www.geo.admin.ch/etc/clientlibs/cmsms-core-common/img/logo-CH.svg" onerror="this.onerror=null; this.src='https://www.geo.admin.ch/etc/clientlibs/cmsms-core-common/img/logo-CH.png'"></div>
+                  <div class="ten wide column">
+                    <h1>A new dress to geo.admin.ch</h1>
+                    <h2 class='subheader'>Proudly turtle configurated</h2>
                   </div>
                 </div>
+              </header>
+              <div class="ui container">
+                <div class="ui segment">
+                  <div class="ui vertically divided grid">
+                    {{{:render . r2h:Default}}}
+                  </div>
+                </div>
+              </div>
+              <div class="ui hidden divider"></div>
+              <div class="ui inverted vertical dividing footer segment">
+              <div class="ui center aligned container">
+                <div class="ui horizontal inverted small divided link list">
+                  <a class="item" href="#">Site Map</a>
+                  <a class="item" href="#">Contact Us</a>
+                  <a class="item" href="#">Terms and Conditions</a>
+                  <a class="item" href="#">Privacy Policy</a>
+                </div>
+              </div>
             </body>""" ;
 <http://rdf2h.github.io/2015/rdf2h#type>
         <http://www.w3.org/2000/01/rdf-schema#Resource>
@@ -119,15 +128,29 @@
       {{@prefix rdf: <http://www.w3.org/2000/01/rdf-schema#>}}
       {{@prefix dc: <http://purl.org/dc/terms/>}}
       {{@prefix s: <http://schema.org/>}}
+      {{@prefix rdfs: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>}}
       {{@prefix opengis: <http://www.opengis.net/ont/geosparql#>}}
 
       {{#+s:hasMap}}
       {{{:render . opengis:FeatureMap}}}
       {{/+s:hasMap}}
 
+      {{#+rdfs:type}}
+      <div class="two column row">
+        <div class="column four wide">
+          <p>Class:</p>
+        </div>
+        <div class="column">
+          {{#rdfs:type}}
+          <p><b><a href="{{{.}}}">{{{.}}}</a></b></p>
+          {{/rdfs:type}}
+        </div>
+      </div>
+      {{/+rdfs:type}}
+
       {{#+s:name}}
       <div class="two column row">
-        <div class="column">
+        <div class="column four wide">
           <p>has name:</p>
         </div>
         <div class="column">
@@ -138,7 +161,7 @@
 
       {{#+geo:countryCode}}
       <div class="two column row">
-        <div class="column">
+        <div class="column four wide">
           <p>Country code:</p>
         </div>
         <div class="column">
@@ -149,37 +172,29 @@
 
       {{#+rdf:seeAlso}}
       <div class="two column row">
-        <div class="column">
+        <div class="column four wide">
           <p>See also:</p>
         </div>
         <div class="column">
-          <p><b>{{{rdf:seeAlso}}}</b></p>
+          {{#rdf:seeAlso}}
+          <p><b><a href="{{{.}}}">{{{.}}}</a></b></p>
+          {{/rdf:seeAlso}}
         </div>
       </div>
       {{/+rdf:seeAlso}}
 
-      {{#dc:hasVersion}}
+      {{#+dc:hasVersion}}
       <div class="two column row">
-        <div class="column">
+        <div class="column four wide">
           <p>Has Version:</p>
         </div>
         <div class="column">
-          <p><b><a href="{{{.}}}">{{{:render . opengis:Feature}}}</a></b></p>
+          {{#dc:hasVersion}}
+          <p><b>{{{:render . opengis:Feature}}}</b></p>
+          {{/dc:hasVersion}}
         </div>
       </div>
-      {{/dc:hasVersion}}
-
-
-      {{#dc:isVersionOf}}
-      <div class="two column row">
-        <div class="column">
-          <p>Has Version:</p>
-        </div>
-        <div class="column">
-          <p><b><a href="{{{.}}}">{{{dc:isVersionOf->s:name}}}</a></b></p>
-        </div>
-      </div>
-      {{/dc:isVersionOf}}
+      {{/+dc:hasVersion}}
       """
 ] .
 
@@ -187,7 +202,7 @@
     r2h:type rdfs:Resource ;
     r2h:context opengis:Feature ;
     r2h:mustache """{{@prefix s: <http://schema.org/>}}
-	  {{{+s:name}}}
+	  <a href="{{.}}">{{{.}}}</a>
     """
 ].
 
