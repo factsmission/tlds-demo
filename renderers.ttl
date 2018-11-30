@@ -7,7 +7,6 @@
 @prefix s: <http://schema.org/> .
 @prefix geoch: <https://ld.geo.admin.ch/def/> .
 @prefix opengis: <http://www.opengis.net/ont/geosparql#> .
-@prefix gt:	<http://vocab.gtfs.org/terms#> .
 
 <genericResource> a r2h:Renderer;
     r2h:type rdfs:Resource;
@@ -69,10 +68,10 @@
             <body>
               <header class="ui main text container">
                 <div class="ui two column stackable grid">
-                  <div class="four wide middle aligned column"><img class="ui middle aligned image" src="https://www.geo.admin.ch/etc/clientlibs/cmsms-core-common/img/logo-CH.svg" onerror="this.onerror=null; this.src='https://www.geo.admin.ch/etc/clientlibs/cmsms-core-common/img/logo-CH.png'"></div>
+                  <div class="three wide middle aligned column"><img class="ui middle aligned image" src="https://www.geo.admin.ch/etc/clientlibs/cmsms-core-common/img/logo-CH.svg" onerror="this.onerror=null; this.src='https://www.geo.admin.ch/etc/clientlibs/cmsms-core-common/img/logo-CH.png'"></div>
                   <div class="ten wide column">
                     <h1>A new dress to geo.admin.ch</h1>
-                    <h2>Proudly turtle configurated</h2>
+                    <h2 class='subheader'>Proudly turtle configurated</h2>
                   </div>
                 </div>
               </header>
@@ -124,7 +123,6 @@
 
 [ a r2h:Renderer;
     r2h:type opengis:Feature ;
-    r2h:type gt:Stop ;
     r2h:context r2h:Default ;
     r2h:mustache """{{@prefix geo: <http://www.geonames.org/ontology#>}}
       {{@prefix rdf: <http://www.w3.org/2000/01/rdf-schema#>}}
@@ -132,7 +130,6 @@
       {{@prefix s: <http://schema.org/>}}
       {{@prefix rdfs: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>}}
       {{@prefix opengis: <http://www.opengis.net/ont/geosparql#>}}
-      {{@prefix gt:	<http://vocab.gtfs.org/terms#>}}
 
       {{#+s:hasMap}}
       {{{:render . opengis:FeatureMap}}}
@@ -145,7 +142,7 @@
         </div>
         <div class="column">
           {{#rdfs:type}}
-          <p><b><a property="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" href="{{{:render  .}}}">{{{:render .}}}</a></b></p>
+          <p><b><a href="{{{.}}}">{{{.}}}</a></b></p>
           {{/rdfs:type}}
         </div>
       </div>
@@ -157,7 +154,7 @@
           <p>has name:</p>
         </div>
         <div class="column">
-          <p property="http://schema.org/name"><b>{{{s:name}}}</b></p>
+          <p><b>{{{s:name}}}</b></p>
         </div>
       </div>
       {{/+s:name}}
@@ -168,7 +165,7 @@
           <p>Country code:</p>
         </div>
         <div class="column">
-          <p property="http://www.geonames.org/ontology#countryCode" ><b>{{{geo:countryCode}}}</b></p>
+          <p><b>{{{geo:countryCode}}}</b></p>
         </div>
       </div>
       {{/+geo:countryCode}}
@@ -180,7 +177,7 @@
         </div>
         <div class="column">
           {{#rdf:seeAlso}}
-          <p><b><a property="http://www.w3.org/2000/01/rdf-schema#seeAlso" href="{{{.}}}">{{{.}}}</a></b></p>
+          <p><b><a href="{{{.}}}">{{{.}}}</a></b></p>
           {{/rdf:seeAlso}}
         </div>
       </div>
@@ -193,7 +190,7 @@
         </div>
         <div class="column">
           {{#dc:hasVersion}}
-          <p prefix="http://purl.org/dc/terms/hasVersion" ><b>{{{:render . opengis:Feature}}}</b></p>
+          <p><b>{{{:render . opengis:Feature}}}</b></p>
           {{/dc:hasVersion}}
         </div>
       </div>
