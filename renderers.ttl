@@ -120,6 +120,7 @@
 
 
 [ a r2h:Renderer;
+    r2h:type r2h:Resource ;
     r2h:type opengis:Feature ;
     r2h:type s:provider ;
     r2h:type gtfs:Stop ;
@@ -134,7 +135,7 @@
       {{@prefix wgs: <http://www.w3.org/2003/01/geo/wgs84_pos#>}}
       {{@prefix geotra: <https://ld.geo.admin.ch/def/transportation/>}}
       {{@prefix ldgeo: <https://ld.geo.admin.ch/def/>}}
-
+      {{@prefix geo: <http://www.geonames.org/ontology>}}
 
       {{#+s:hasMap}}
       {{{:render . opengis:FeatureMap}}}
@@ -167,7 +168,7 @@
       {{#+s:alternateName}}
       <div class="two column row">
         <div class="column four wide">
-          <p>Has Provider:</p>
+          <p>Has Alternate Name:</p>
         </div>
         <div class="column">
           {{#s:alternateName}}
@@ -200,6 +201,73 @@
       </div>
       {{/+ldgeo:bfsNumber}}
 
+      {{#+s:provider}}
+      <div class="two column row">
+        <div class="column four wide">
+          <p>Has Provider:</p>
+        </div>
+        <div class="column">
+          {{#s:provider}}
+          <p><b>{{{:render . gt:Link}}}</b></p>
+          {{/s:provider}}
+        </div>
+      </div>
+      {{/+s:provider}}
+
+
+      {{#+geo:parentCountry}}
+      <div class="two column row">
+        <div class="column four wide">
+          <p>Parent Country:</p>
+        </div>
+        <div class="column">
+          {{#geo:parentCountry}}
+          <p><b>{{{:render . gt:Link}}}</b></p>
+          {{/geo:parentCountry}}
+        </div>
+      </div>
+      {{/+geo:parentCountry}}
+
+
+      {{#+geo:parentADM1}}
+      <div class="two column row">
+        <div class="column four wide">
+          <p>Has Parent ADM1:</p>
+        </div>
+        <div class="column">
+          {{#geo:parentADM1}}
+          <p><b>{{{:render . gt:Link}}}</b></p>
+          {{/geo:parentADM1}}
+        </div>
+      </div>
+      {{/+geo:parentADM1}}
+
+      {{#+geo:parentADM2}}
+      <div class="two column row">
+        <div class="column four wide">
+          <p>Has Parent ADM2:</p>
+        </div>
+        <div class="column">
+          {{#geo:parentADM2}}
+          <p><b>{{{:render . gt:Link}}}</b></p>
+          {{/geo:parentADM2}}
+        </div>
+      </div>
+      {{/+geo:parentADM2}}
+
+
+      {{#+geo:population}}
+      <div class="two column row">
+        <div class="column four wide">
+          <p>Has Population:</p>
+        </div>
+        <div class="column">
+          <p><b>{{{geo:population}}}</b></p>
+        </div>
+      </div>
+      {{/+geo:population}}
+
+
       {{#+wgs:long}}
       <div class="two column row">
         <div class="column four wide">
@@ -211,10 +279,34 @@
       </div>
       {{/+wgs:long}}
 
+      {{#+opengis:hasGeometry}}
+      <div class="two column row">
+        <div class="column four wide">
+          <p>Has Shape:</p>
+        </div>
+        <div class="column">
+          <p><b>{{{:render . gt:Shape}}}</b></p>
+        </div>
+      </div>
+      {{/+opengis:hasGeometry}}
+
       {{#+s:provider}}
       <div class="two column row">
         <div class="column four wide">
-          <p>Has Proivider:</p>
+          <p>Has Provider:</p>
+        </div>
+        <div class="column">
+          {{#s:provider}}
+          <p><b>{{{:render . gt:Link}}}</b></p>
+          {{/s:provider}}
+        </div>
+      </div>
+      {{/+s:provider}}
+
+      {{#+s:provider}}
+      <div class="two column row">
+        <div class="column four wide">
+          <p>Has Provider:</p>
         </div>
         <div class="column">
           {{#s:provider}}
@@ -264,6 +356,31 @@
       </div>
       {{/+s:validFrom}}
 
+      {{#+s:validUntil}}
+      <div class="two column row">
+        <div class="column four wide">
+          <p>Valid Until:</p>
+        </div>
+        <div class="column">
+          {{#s:validUntil}}
+          <p><b>{{{:render . gt:Date}}}</b></p>
+          {{/s:validUntil}}
+        </div>
+      </div>
+      {{/+s:validUntil}}
+
+      {{#+dc:issued}}
+      <div class="two column row">
+        <div class="column four wide">
+          <p>Issued:</p>
+        </div>
+        <div class="column">
+          {{#dc:issued}}
+          <p><b>{{{:render . gt:Date}}}</b></p>
+          {{/dc:issued}}
+        </div>
+      </div>
+      {{/+dc:issued}}
 
       {{#+geotra:meansOfTransportation}}
       <div class="two column row">
@@ -316,6 +433,19 @@
       </div>
       {{/+dc:hasVersion}}
 
+      {{#+dc:isVersionOf}}
+      <div class="two column row">
+        <div class="column four wide">
+          <p>Is Version Of:</p>
+        </div>
+        <div class="column">
+          {{#dc:isVersionOf}}
+          <p><b>{{{:render . gt:Link}}}</b></p>
+          {{/dc:isVersionOf}}
+        </div>
+      </div>
+      {{/+dc:isVersionOf}}
+
       {{#+s:sameAs}}
       <div class="two column row">
         <div class="column four wide">
@@ -367,6 +497,27 @@
     """
 ].
 
+
+
+[ a r2h:Renderer ;
+    r2h:type rdfs:Resource  ;
+    r2h:context gt:Shape ;
+    r2h:mustache """
+    {{@prefix opengis: <http://www.opengis.net/ont/geosparql#>}}
+    {{@prefix geodef: <https://ld.geo.admin.ch/def/lakeArea>}}
+    {{@prefix dbp: <http://dbpedia.org/property/>}}
+    {{@prefix gt: <http://rdf2h.github.io/2016/generic-rdf2h-renderers/>}}
+
+
+    {{#opengis:hasGeometry}}<p><b>Geometry: </b>{{{:render . gt:Link}}}</p>{{/opengis:hasGeometry}}
+    {{#+opengis:asWKT}}
+    <p><b>WKT: </b>{{#opengis:asWKT}}{{{:render . gt:Link}}}{{/opengis:asWKT}}</p>
+    {{/+opengis:asWKT}}
+    {{#+dbp:area}}<p><b>Area: </b>{{dbp:area}}</p>{{/+dbp:area}}
+    {{#+geodef:lakeArea}}<p><b>Lake area: </b>{{geodef:lakeArea}}</p>{{/+geodef:lakeArea}}
+
+    """
+].
 
 [ a r2h:Renderer ;
     r2h:type rdfs:Resource ;
