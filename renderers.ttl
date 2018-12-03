@@ -93,6 +93,22 @@
                   <a class="item" href="#">Privacy Policy</a>
                 </div>
               </div>
+              <script type="application/ld+json">
+                {
+                  "@context": "http://schema.org",
+                  "@type": "WebSite",
+                  "url": "https://localhost:5000",
+                  "name": "ld.geo.admin.ch",
+                  "creator": {
+                    "@type": "Organization",
+                    "name": "FactsMission",
+                    "legalName": "FactsMission AG",
+                    "url": "https://factsmission.com"
+                  },
+                  "description": "A demo of tlds.",
+                  "inLanguage": "en"
+                }
+              </script>
             </body>""" ;
 <http://rdf2h.github.io/2015/rdf2h#type>
         <http://www.w3.org/2000/01/rdf-schema#Resource>
