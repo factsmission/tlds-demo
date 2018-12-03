@@ -64,14 +64,17 @@
               <style></style>
             </head>
             <body>
-              <header class="ui main text container">
+              <header class="ui container">
+                <div class="ui hidden divider"></div>
                 <div class="ui two column stackable grid">
-                  <div class="three wide middle aligned column"><img class="ui middle aligned image" src="https://www.geo.admin.ch/etc/clientlibs/cmsms-core-common/img/logo-CH.svg" onerror="this.onerror=null; this.src='https://www.geo.admin.ch/etc/clientlibs/cmsms-core-common/img/logo-CH.png'"></div>
+                  <div class="four wide middle aligned column"><img class="ui left aligned image" src="https://www.geo.admin.ch/etc/clientlibs/cmsms-core-common/img/logo-CH.svg" onerror="this.onerror=null; this.src='https://www.geo.admin.ch/etc/clientlibs/cmsms-core-common/img/logo-CH.png'" style=" height: auto; max-width: 400px;"></div>
+
                   <div class="ten wide column">
                     <h1>A new dress to geo.admin.ch</h1>
-                    <h2 class='subheader'>Proudly turtle configurated</h2>
+                    <p class='subheader'>Proudly turtle configurated</p>
                   </div>
                 </div>
+                <div class="ui hidden divider"></div>
               </header>
               <div class="ui container">
                 <div class="ui segment">
