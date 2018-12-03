@@ -7,6 +7,10 @@
 @prefix s: <http://schema.org/> .
 @prefix geoch: <https://ld.geo.admin.ch/def/> .
 @prefix opengis: <http://www.opengis.net/ont/geosparql#> .
+<<<<<<< Updated upstream
+=======
+@prefix gtfs:	<http://vocab.gtfs.org/terms#> .
+>>>>>>> Stashed changes
 
 <genericResource> a r2h:Renderer;
     r2h:type rdfs:Resource;
@@ -45,9 +49,6 @@
 
     """
 .
-
-
-
 
 [ a       <http://rdf2h.github.io/2015/rdf2h#Renderer> ;
 <http://www.w3.org/2000/01/rdf-schema#comment>
@@ -130,6 +131,10 @@
       {{@prefix s: <http://schema.org/>}}
       {{@prefix rdfs: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>}}
       {{@prefix opengis: <http://www.opengis.net/ont/geosparql#>}}
+<<<<<<< Updated upstream
+=======
+      {{@prefix gtfs:	<http://vocab.gtfs.org/terms#>}}
+>>>>>>> Stashed changes
 
       {{#+s:hasMap}}
       {{{:render . opengis:FeatureMap}}}
