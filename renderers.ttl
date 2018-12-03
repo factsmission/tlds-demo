@@ -7,10 +7,7 @@
 @prefix s: <http://schema.org/> .
 @prefix geoch: <https://ld.geo.admin.ch/def/> .
 @prefix opengis: <http://www.opengis.net/ont/geosparql#> .
-<<<<<<< Updated upstream
-=======
 @prefix gtfs:	<http://vocab.gtfs.org/terms#> .
->>>>>>> Stashed changes
 
 <genericResource> a r2h:Renderer;
     r2h:type rdfs:Resource;
@@ -84,9 +81,9 @@
                 </div>
               </div>
               <div class="ui hidden divider"></div>
-              <div class="ui inverted vertical dividing footer segment">
+              <div class="ui inverted vertical dividing footer segment form-page">
               <div class="ui center aligned container">
-                <div class="ui horizontal inverted small divided link list">
+                <div class="ui horizontal inverted small divided link list ">
                   <a class="item" href="#">Site Map</a>
                   <a class="item" href="#">Contact Us</a>
                   <a class="item" href="#">Terms and Conditions</a>
@@ -124,6 +121,8 @@
 
 [ a r2h:Renderer;
     r2h:type opengis:Feature ;
+    r2h:type s:provider ;
+    r2h:type gtfs:Stop ;
     r2h:context r2h:Default ;
     r2h:mustache """{{@prefix geo: <http://www.geonames.org/ontology#>}}
       {{@prefix rdf: <http://www.w3.org/2000/01/rdf-schema#>}}
@@ -131,10 +130,11 @@
       {{@prefix s: <http://schema.org/>}}
       {{@prefix rdfs: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>}}
       {{@prefix opengis: <http://www.opengis.net/ont/geosparql#>}}
-<<<<<<< Updated upstream
-=======
-      {{@prefix gtfs:	<http://vocab.gtfs.org/terms#>}}
->>>>>>> Stashed changes
+      {{@prefix gt: <http://rdf2h.github.io/2016/generic-rdf2h-renderers/>}}
+      {{@prefix wgs: <http://www.w3.org/2003/01/geo/wgs84_pos#>}}
+      {{@prefix geotra: <https://ld.geo.admin.ch/def/transportation/>}}
+      {{@prefix ldgeo: <https://ld.geo.admin.ch/def/>}}
+
 
       {{#+s:hasMap}}
       {{{:render . opengis:FeatureMap}}}
@@ -156,13 +156,128 @@
       {{#+s:name}}
       <div class="two column row">
         <div class="column four wide">
-          <p>has name:</p>
+          <p>Has Name:</p>
         </div>
         <div class="column">
           <p><b>{{{s:name}}}</b></p>
         </div>
       </div>
       {{/+s:name}}
+
+      {{#+s:alternateName}}
+      <div class="two column row">
+        <div class="column four wide">
+          <p>Has Provider:</p>
+        </div>
+        <div class="column">
+          {{#s:alternateName}}
+          <p><b>{{{:render . gt:Link}}}</b></p>
+          {{/s:alternateName}}
+        </div>
+      </div>
+      {{/+s:alternateName}}
+
+
+      {{#+dc:identifier}}
+      <div class="two column row">
+        <div class="column four wide">
+          <p>Has Identifier:</p>
+        </div>
+        <div class="column">
+          <p><b>{{{dc:identifier}}}</b></p>
+        </div>
+      </div>
+      {{/+dc:identifier}}
+
+      {{#+ldgeo:bfsNumber}}
+      <div class="two column row">
+        <div class="column four wide">
+          <p>Has Identifier:</p>
+        </div>
+        <div class="column">
+          <p><b>{{{ldgeo:bfsNumber}}}</b></p>
+        </div>
+      </div>
+      {{/+ldgeo:bfsNumber}}
+
+      {{#+wgs:long}}
+      <div class="two column row">
+        <div class="column four wide">
+          <p>Has Localization:</p>
+        </div>
+        <div class="column">
+          {{{:render . gt:Position}}}
+        </div>
+      </div>
+      {{/+wgs:long}}
+
+      {{#+s:provider}}
+      <div class="two column row">
+        <div class="column four wide">
+          <p>Has Proivider:</p>
+        </div>
+        <div class="column">
+          {{#s:provider}}
+          <p><b>{{{:render . gt:Link}}}</b></p>
+          {{/s:provider}}
+        </div>
+      </div>
+      {{/+s:provider}}
+
+
+      {{#+s:releaseDate}}
+      <div class="two column row">
+        <div class="column four wide">
+          <p>Release Date:</p>
+        </div>
+        <div class="column">
+          {{#s:releaseDate}}
+          <p><b>{{{:render . gt:Date}}}</b></p>
+          {{/s:releaseDate}}
+        </div>
+      </div>
+      {{/+s:releaseDate}}
+
+      {{#+s:dateModified}}
+      <div class="two column row">
+        <div class="column four wide">
+          <p>Date Modified:</p>
+        </div>
+        <div class="column">
+          {{#s:dateModified}}
+          <p><b>{{{:render . gt:Date}}}</b></p>
+          {{/s:dateModified}}
+        </div>
+      </div>
+      {{/+s:dateModified}}
+
+      {{#+s:validFrom}}
+      <div class="two column row">
+        <div class="column four wide">
+          <p>Valid From:</p>
+        </div>
+        <div class="column">
+          {{#s:validFrom}}
+          <p><b>{{{:render . gt:Date}}}</b></p>
+          {{/s:validFrom}}
+        </div>
+      </div>
+      {{/+s:validFrom}}
+
+
+      {{#+geotra:meansOfTransportation}}
+      <div class="two column row">
+        <div class="column four wide">
+          <p>Has Means of Transportation:</p>
+        </div>
+        <div class="column">
+          {{#geotra:meansOfTransportation}}
+          <p><b>{{{:render . gt:Link}}}</b></p>
+          {{/geotra:meansOfTransportation}}
+        </div>
+      </div>
+      {{/+geotra:meansOfTransportation}}
+
 
       {{#+geo:countryCode}}
       <div class="two column row">
@@ -195,19 +310,60 @@
         </div>
         <div class="column">
           {{#dc:hasVersion}}
-          <p><b>{{{:render . opengis:Feature}}}</b></p>
+          <p><b>{{{:render . gt:Link}}}</b></p>
           {{/dc:hasVersion}}
         </div>
       </div>
       {{/+dc:hasVersion}}
+
+      {{#+s:sameAs}}
+      <div class="two column row">
+        <div class="column four wide">
+          <p>Same As:</p>
+        </div>
+        <div class="column">
+          {{#s:sameAs}}
+          <p><b>{{{:render . gt:Link}}}</b></p>
+          {{/s:sameAs}}
+        </div>
+      </div>
+      {{/+s:sameAs}}
       """
 ] .
 
 [ a r2h:Renderer ;
     r2h:type rdfs:Resource ;
-    r2h:context opengis:Feature ;
-    r2h:mustache """{{@prefix s: <http://schema.org/>}}
+    r2h:context gt:Link ;
+    r2h:mustache """
 	  <a href="{{.}}">{{{.}}}</a>
+    """
+].
+
+[ a r2h:Renderer ;
+    r2h:type <http://www.w3.org/2001/XMLSchema#date> ;
+    r2h:type <http://www.w3.org/2001/XMLSchema#string> ;
+    r2h:context gt:Date ;
+    r2h:mustache """
+	  {{{.}}}
+    """
+].
+
+
+[ a r2h:Renderer ;
+    r2h:type <http://www.w3.org/2000/01/rdf-schema#Resource> ;
+    r2h:context gt:Position ;
+    r2h:mustache """{{@prefix wgs: <http://www.w3.org/2003/01/geo/wgs84_pos#>}}
+    {{@prefix dbo: <http://dbpedia.org/ontology/>}}
+    {{@prefix geotra: <https://ld.geo.admin.ch/def/transportation/>}}
+    {{@prefix gt: <http://rdf2h.github.io/2016/generic-rdf2h-renderers/>}}
+    {{@prefix s: <http://schema.org/>}}
+
+
+	  <p><b>Lat-Long:</b>  <a href="https://www.openstreetmap.org/#map=15/{{{wgs:long}}}/{{{wgs:long}}}">{{{wgs:long}}},{{{wgs:long}}}</a></p>
+    <p><b>Elevation: </b>{{{dbo:elevation}}}m</p>
+    <p><b>Operating Point Type:</b>{{#geotra:operatingPointType}}{{{:render . gt:Link}}}{{/geotra:operatingPointType}}</p>
+    <p><b>Contained in Place: </b>{{#s:containedInPlace}}{{{:render . gt:Link}}}{{/s:containedInPlace}}</p>
+
     """
 ].
 
