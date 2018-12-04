@@ -16,7 +16,7 @@ You need an executable jar of TLDS, to get one build TLDS with
 > mvn install -P executable
 > ```
 >
-> Note that because this depends on an slds SNAPSHOT version you > need to compile that first:
+> Note that because this depends on an slds SNAPSHOT version you need to compile that first:
 >
 >> In the directory containing slds run
 >> ```
