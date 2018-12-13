@@ -1,13 +1,14 @@
 # tlds-demo
 
-The purpose of this project is to deomstrate the use of [TLDS](https://github.com/linked-solutions/tlds).
+The purpose of this project is to demostrate the use of [TLDS](https://github.com/linked-solutions/tlds).
 
-For this demonstartion we're using the SPARQL endpoint at https://ld.geo.admin.ch/query/.
+For this demonstration we're using the SPARQL endpoint at https://ld.geo.admin.ch/query/.
 
 ## Usage
 
-Since we cannnot uploadt the desciption of the renderers to geo.admin.ch we simply serve them separatedly:
- * The configuration assumes that renderers.ttl is served at http://localhost:8080/renderers.ttl use the webserver of your preference to get it tere
+In the simplest usage scenario both data and renderers are provided by the same SPARQL Endpoint. Since we cannnot upload the desciption of the renderers to geo.admin.ch we have to serve them separatedly. Any webserver can be used for this purpose.
+
+ * The [configuration](swissgeo-sconfig.ttl) assumes that renderers.ttl is served at http://localhost:8080/renderers.ttl
 
 You need an executable jar of TLDS, to get one build TLDS with
 
