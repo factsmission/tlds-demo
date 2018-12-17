@@ -6,7 +6,25 @@ For this demonstration we're using the SPARQL endpoint at https://ld.geo.admin.c
 
 ## Usage
 
+You can launch tlds-demo either with Java or with Docker.
 
+### Usage with docker
+
+Using our pre-built images:
+
+    docker run -p 5000:5000 --name tlds-demo factsmission/tlds-demo swissgeo-config-localhost.ttl
+
+Acces for example: http://localhost:5000/boundaries/municipality/261:2016
+
+To build it yourself, for example after making changes to the renderers, execute: 
+
+    docker build . -t tlds-demo
+
+This builds an image called `tlds-demo` so you'll want to run this image:
+
+    docker run -p 5000:5000 --name tlds-demo tlds-demo swissgeo-config-localhost.ttl
+
+### Usage with Java
 
 You need an executable jar of TLDS, to get one build TLDS with
 
