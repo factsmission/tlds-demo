@@ -13,5 +13,10 @@
     slds:resourceDescriptionProvider [
         slds:javaClass "solutions.linked.slds.providers.GraphAndContext";
         slds:sparqlEndpoint <https://ld.geo.admin.ch/query> ;    
-        slds:enableVituosoWorkAround true
+        slds:enableVituosoWorkAround true;
+        slds:iriTranslators (
+            [
+                slds:backendPrefix "https://ld.geo.admin.ch/";
+                slds:frontendPrefix "https://tlds-demo.factsmission.org/"
+            ]) 
     ].
