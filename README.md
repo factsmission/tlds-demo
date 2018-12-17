@@ -6,9 +6,7 @@ For this demonstration we're using the SPARQL endpoint at https://ld.geo.admin.c
 
 ## Usage
 
-In the simplest usage scenario both data and renderers are provided by the same SPARQL Endpoint. Since we cannnot upload the desciption of the renderers to geo.admin.ch we have to serve them separatedly. Any webserver can be used for this purpose.
 
- * The [configuration](swissgeo-sconfig.ttl) assumes that renderers.ttl is served at http://localhost:8080/renderers.ttl
 
 You need an executable jar of TLDS, to get one build TLDS with
 
@@ -27,7 +25,7 @@ You need an executable jar of TLDS, to get one build TLDS with
 Now you have an executable file name like tlds-1.0.0-SNAPSHOT.jar in the target folder. Execute that file from this directory with
 
 ```
-java -jar <path-to-tlds>/target/tlds-1.0.0-SNAPSHOT.jar swissgeo-config.ttl
+java -jar <path-to-tlds>/target/tlds-1.0.0-SNAPSHOT.jar swissgeo-config-localhost.ttl
 ```
 
 Acces for example: http://localhost:5000/boundaries/municipality/261:2016

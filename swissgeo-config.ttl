@@ -4,11 +4,24 @@
 
 <>
     slds:port 5000 ;
-    slds:sparqlEndpoint <https://ld.geo.admin.ch/query> ;
-    tlds:renderers ("https://rdf2h.github.io/renderers/0.0.2/fallback-renderers.ttl" "https://rawgit.com/rdf2h/renderers/master/schema-org-renderers.ttl" "http://localhost:8080/renderers.ttl");
-    slds:enableVituosoWorkAround true;
-    slds:iriTranslators (
-        [
-            slds:backendPrefix "https://ld.geo.admin.ch/";
-            slds:frontendPrefix "http://localhost:5000/"
-        ]) .
+     tlds:renderers ("https://rdf2h.github.io/renderers/0.0.2/fallback-renderers.ttl" "https://rawgit.com/rdf2h/renderers/master/schema-org-renderers.ttl" "/renderers.ttl");
+    slds:resourceDescriptionProvider [
+        slds:javaClass "solutions.linked.slds.providers.FileResourceDescription";
+        slds:resource <https://tlds-demo.factsmission.org/renderers>;
+        slds:file "renderers.ttl";
+        slds:iriTranslators (
+            [
+                slds:backendPrefix "https://tlds-demo.factsmission.org/"; 
+                slds:frontendPrefix "http://localhost:5000/"
+            ])
+    ];
+    slds:resourceDescriptionProvider [
+        slds:javaClass "solutions.linked.slds.providers.GraphAndContext";
+        slds:sparqlEndpoint <https://ld.geo.admin.ch/query> ;    
+        slds:enableVituosoWorkAround true;
+        slds:iriTranslators (
+            [
+                slds:backendPrefix "https://ld.geo.admin.ch/";
+                slds:frontendPrefix "http://localhost:5000/"
+            ]) 
+    ].
