@@ -85,16 +85,30 @@
                 </div>
               </div>
               <div class="ui hidden divider"></div>
-              <div class="ui inverted vertical dividing footer segment form-page">
-              <div class="ui center aligned container">
-                <div class="ui horizontal inverted small divided link list ">
-                  <a class="item" href="#">Site Map</a>
-                  <a class="item" href="#">Contact Us</a>
-                  <a class="item" href="#">Terms and Conditions</a>
-                  <a class="item" href="#">Privacy Policy</a>
-                  Logo by <a href="https://en.wikipedia.org/wiki/File:Flag-map_of_Switzerland.svg">Wikimedia Commons</a> under <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.en">Creative Commons Attribution-Share Alike 3.0 Unported</a> license.
+              <div class="ui inverted vertical dividing footer segment form-page padded">
+                <div class="ui hidden divider"></div>
+                <div class="ui grid container">
+                  <div class="ui eleven wide column">
+                    <div class="ui container">
+                      This project is a <a href="https://github.com/factsmission/tlds">TLDS</a> demo based on the data from <a href="https://www.geo.admin.ch">geo.admin.ch</a> by <a href="https://factsmission.com">FactsMission</a>.
+                    </div>
+                    <div class="ui hidden divider"></div>
+                    <div class="ui aligned container">
+                      Check the source-code on <a href="https://github.com/linked-solutions/tlds-demo" style="color: white;"><i class="large github icon"></i></a>
+                      <div class="ui divider"></div>
+                    </div>
+                    <div class="ui container">
+                      <small>Logo by <a href="https://en.wikipedia.org/wiki/File:Flag-map_of_Switzerland.svg">Wikimedia Commons</a> under <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.en">Creative Commons Attribution-Share Alike 3.0 Unported</a> license.</small>
+                    </div>
+                  </div>
+                  <div class="ui one wide column">
+                    <a href="https://factsmission.com/"><img style="max-height:80px" src="https://factsmission.com/img/logo.svg"></a>
+                  </div>
                 </div>
-              </div>
+                <div class="ui hidden divider"></div>
+              <div>
+
+
               <script type="application/ld+json">
                 {
                   "@context": "http://schema.org",
