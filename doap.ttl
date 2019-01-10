@@ -15,6 +15,6 @@
     foaf:homepage <https://factsmission.com/>
   ] ;
   doap:repository [
-    a doap:GITRepository ;
+    a doap:GitRepository ;
     doap:browse <https://github.com/factsmission/tlds-demo>
   ] .
