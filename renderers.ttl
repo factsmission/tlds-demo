@@ -68,7 +68,7 @@
               <header class="ui container">
                 <div class="ui hidden divider"></div>
                 <div class="ui two column stackable grid">
-                  <div class="four wide middle aligned column"><img class="ui left aligned image" src="https://www.geo.admin.ch/etc/clientlibs/cmsms-core-common/img/logo-CH.svg" onerror="this.onerror=null; this.src='https://www.geo.admin.ch/etc/clientlibs/cmsms-core-common/img/logo-CH.png'" style=" height: auto; max-width: 400px;"></div>
+                  <div class="four wide center aligned column"><img class="ui middle aligned image" src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Flag-map_of_Switzerland.svg" onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/3/3b/Flag-map_of_Switzerland.svg'" style=" height: auto; max-width: 400px; max-height: 120px;"></div>
 
                   <div class="ten wide column">
                     <h1>A new dress to geo.admin.ch</h1>
@@ -92,6 +92,7 @@
                   <a class="item" href="#">Contact Us</a>
                   <a class="item" href="#">Terms and Conditions</a>
                   <a class="item" href="#">Privacy Policy</a>
+                  Logo by <a href="https://en.wikipedia.org/wiki/File:Flag-map_of_Switzerland.svg">Wikimedia Commons</a> under <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.en">Creative Commons Attribution-Share Alike 3.0 Unported</a> license.
                 </div>
               </div>
               <script type="application/ld+json">
