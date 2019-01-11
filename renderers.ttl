@@ -48,12 +48,41 @@
     """
 .
 
-[ a       <http://rdf2h.github.io/2015/rdf2h#Renderer> ;
-<http://www.w3.org/2000/01/rdf-schema#comment>
-        "Renders a full page, delegating to renderers in the default \n    context for the body, and to gt:HtmlHead for things like the html title" ;
-<http://rdf2h.github.io/2015/rdf2h#context>
-        <http://rdf2h.github.io/2016/generic-rdf2h-renderers/FullPage> ;
-<http://rdf2h.github.io/2015/rdf2h#mustache>
+
+[ a r2h:Renderer ;
+    r2h:context gt:EmptyPage ;
+    r2h:mustache """
+    @prefix doap: <http://usefulinc.com/ns/doap#> .
+    @prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+    [ a doap:Project ;
+      doap:name "TLDS demo " ;
+      doap:shortdesc "A linked data explorer based on TLDS and data from geo.admin.ch." ;
+      doap:description "A linked data explorer based on TLDS (https://github.com/linked-solutions/tlds) based on geographical data from geo.admin.ch. Configured in turtle." ;
+      doap:homepage <https://tlds-demo.factsmission.org> ;
+      doap:category <http://njh.me/Semantic Web> ;
+      doap:programming-language "JAVA" ;
+      doap:developer [
+        a foaf:Person ;
+        foaf:name "Factsmission" ;
+        foaf:homepage <https://factsmission.com/>
+      ] ;
+      doap:repository [
+        a doap:GitRepository ;
+        doap:browse <https://github.com/factsmission/tlds-demo>
+      ] .
+    ].
+    """
+] .
+
+
+[ a r2h:Renderer ;
+    r2h:type opengis:Feature ;
+    r2h:type s:provider ;
+    r2h:type gtfs:Stop ;
+    rdfs:comment "Renders a full page, delegating to renderers in the default \n    context for the body, and to gt:HtmlHead for things like the html title" ;
+    r2h:context gt:FullPage ;
+    r2h:mustache
         """
         {{{@prefix r2h: <http://rdf2h.github.io/2015/rdf2h#>}}}
         {{{@prefix gt: <http://rdf2h.github.io/2016/generic-rdf2h-Renderers/>}}}
@@ -65,70 +94,73 @@
               <style></style>
             </head>
             <body>
-              <header class="ui container">
-                <div class="ui hidden divider"></div>
-                <div class="ui two column stackable grid">
-                  <div class="four wide center aligned column"><img class="ui middle aligned image" src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Flag-map_of_Switzerland.svg" onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/3/3b/Flag-map_of_Switzerland.svg'" style=" height: auto; max-width: 400px; max-height: 120px;"></div>
+              <div style="display: flex; min-height: 100vh; flex-direction: column;">
+                <header class="ui container">
+                  <div class="ui hidden divider"></div>
+                  <div class="ui two column stackable grid">
+                    <div class="four wide center aligned column"><img class="ui middle aligned image" src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Flag-map_of_Switzerland.svg" onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/3/3b/Flag-map_of_Switzerland.svg'" style=" height: auto; max-width: 400px; max-height: 120px;"></div>
 
-                  <div class="ten wide column">
-                    <h1>A new dress to geo.admin.ch</h1>
-                    <p class='subheader'>Proudly turtle configurated</p>
+                    <div class="ten wide column">
+                      <h1>A new dress to geo.admin.ch</h1>
+                      <p class='subheader'>Proudly turtle configurated</p>
+                    </div>
                   </div>
-                </div>
-                <div class="ui hidden divider"></div>
-              </header>
-              <div class="ui container">
-                <div class="ui segment">
-                  <div class="ui vertically divided grid">
-                    {{{:render . r2h:Default}}}
+                  <div class="ui hidden divider"></div>
+                </header>
+                <div class="ui container" style="flex: 1">
+                  <div class="ui segment">
+                    <div class="ui vertically divided grid">
+                      {{{:render . r2h:Default}}}
+                    </div>
                   </div>
+                  <div class="ui hidden divider"></div>
                 </div>
+                <footer class="ui inverted vertical dividing footer segment form-page padded">
+                  <div class="ui hidden divider"></div>
+                  <div class="ui grid container">
+                    <div class="ui eleven wide column">
+                      <div class="ui container">
+                        This project is a <a href="https://github.com/factsmission/tlds">TLDS</a> demo based on the data from <a href="https://www.geo.admin.ch">geo.admin.ch</a> by <a href="https://factsmission.com">FactsMission</a>.
+                      </div>
+                      <div class="ui hidden divider"></div>
+                      <div class="ui aligned container">
+                        Check the source-code on <a href="https://github.com/linked-solutions/tlds-demo" style="color: white;"><i class="large github icon"></i></a>
+                        <div class="ui divider"></div>
+                      </div>
+                      <div class="ui container">
+                        <small>Logo by <a href="https://en.wikipedia.org/wiki/File:Flag-map_of_Switzerland.svg">Wikimedia Commons</a> under <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.en">Creative Commons Attribution-Share Alike 3.0 Unported</a> license.</small>
+                      </div>
+                    </div>
+                    <div class="ui one wide column">
+                      <a href="https://factsmission.com/"><img style="max-height:80px" src="https://factsmission.com/img/logo.svg"></a>
+                    </div>
+                  </div>
+                  <div class="ui hidden divider"></div>
+                </footer>
+
+
+                <script type="application/ld+json">
+                  {
+                    "@context": "http://schema.org",
+                    "@type": "WebSite",
+                    "url": "https://localhost:5000",
+                    "name": "ld.geo.admin.ch",
+                    "creator": {
+                      "@type": "Organization",
+                      "name": "FactsMission",
+                      "legalName": "FactsMission AG",
+                      "url": "https://factsmission.com"
+                    },
+                    "description": "A demo of tlds.",
+                    "inLanguage": "en"
+                  }
+                </script>
               </div>
-              <div class="ui hidden divider"></div>
-              <div class="ui inverted vertical dividing footer segment form-page padded">
-                <div class="ui hidden divider"></div>
-                <div class="ui grid container">
-                  <div class="ui eleven wide column">
-                    <div class="ui container">
-                      This project is a <a href="https://github.com/factsmission/tlds">TLDS</a> demo based on the data from <a href="https://www.geo.admin.ch">geo.admin.ch</a> by <a href="https://factsmission.com">FactsMission</a>.
-                    </div>
-                    <div class="ui hidden divider"></div>
-                    <div class="ui aligned container">
-                      Check the source-code on <a href="https://github.com/linked-solutions/tlds-demo" style="color: white;"><i class="large github icon"></i></a>
-                      <div class="ui divider"></div>
-                    </div>
-                    <div class="ui container">
-                      <small>Logo by <a href="https://en.wikipedia.org/wiki/File:Flag-map_of_Switzerland.svg">Wikimedia Commons</a> under <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.en">Creative Commons Attribution-Share Alike 3.0 Unported</a> license.</small>
-                    </div>
-                  </div>
-                  <div class="ui one wide column">
-                    <a href="https://factsmission.com/"><img style="max-height:80px" src="https://factsmission.com/img/logo.svg"></a>
-                  </div>
-                </div>
-                <div class="ui hidden divider"></div>
-              <div>
-
-
-              <script type="application/ld+json">
-                {
-                  "@context": "http://schema.org",
-                  "@type": "WebSite",
-                  "url": "https://localhost:5000",
-                  "name": "ld.geo.admin.ch",
-                  "creator": {
-                    "@type": "Organization",
-                    "name": "FactsMission",
-                    "legalName": "FactsMission AG",
-                    "url": "https://factsmission.com"
-                  },
-                  "description": "A demo of tlds.",
-                  "inLanguage": "en"
-                }
-              </script>
             </body>""" ;
 <http://rdf2h.github.io/2015/rdf2h#type>
         <http://www.w3.org/2000/01/rdf-schema#Resource>
 ] .
+
 
 [ a       <http://rdf2h.github.io/2015/rdf2h#Renderer> ;
   <http://rdf2h.github.io/2015/rdf2h#context>
