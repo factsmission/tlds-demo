@@ -1,13 +1,13 @@
 @prefix doap: <http://usefulinc.com/ns/doap#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 
-<>
+[]
   a doap:Project ;
   doap:name "TLDS demo " ;
   doap:shortdesc "A linked data explorer based on TLDS and data from geo.admin.ch." ;
   doap:description "A linked data explorer based on TLDS (https://github.com/linked-solutions/tlds) based on geographical data from geo.admin.ch. Configured in turtle." ;
   doap:homepage <https://tlds-demo.factsmission.org> ;
-  doap:category <http://njh.me/Semantic Web> ;
+  doap:category <http://njh.me/Semantic_Web> ;
   doap:programming-language "JAVA" ;
   doap:developer [
     a foaf:Person ;
