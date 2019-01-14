@@ -11,6 +11,11 @@
         slds:file "renderers.ttl"
     ];
     slds:resourceDescriptionProvider [
+        slds:javaClass "solutions.linked.slds.providers.FileResourceDescription";
+        slds:resource <https://tlds-demo.factsmission.org/>;
+        slds:file "doap.ttl"
+    ];
+    slds:resourceDescriptionProvider [
         slds:javaClass "solutions.linked.slds.providers.GraphAndContext";
         slds:sparqlEndpoint <https://ld.geo.admin.ch/query> ;    
         slds:enableVituosoWorkAround true;
