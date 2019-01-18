@@ -16,6 +16,16 @@
             ])
     ];
     slds:resourceDescriptionProvider [
+        slds:javaClass "solutions.linked.slds.providers.FileResourceDescription";
+        slds:resource <https://tlds-demo.factsmission.org/>;
+        slds:file "doap.ttl";
+        slds:iriTranslators (
+            [
+                slds:backendPrefix "https://tlds-demo.factsmission.org/";
+                slds:frontendPrefix "http://localhost:5000/"
+            ]) 
+    ];
+    slds:resourceDescriptionProvider [
         slds:javaClass "solutions.linked.slds.providers.GraphAndContext";
         slds:sparqlEndpoint <https://ld.geo.admin.ch/query> ;    
         slds:enableVituosoWorkAround true;
