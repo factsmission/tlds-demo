@@ -9,6 +9,7 @@
 @prefix geoch: <https://ld.geo.admin.ch/def/> .
 @prefix opengis: <http://www.opengis.net/ont/geosparql#> .
 @prefix gtfs:	<http://vocab.gtfs.org/terms#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
 
 <genericResource> a r2h:Renderer;
     r2h:type rdfs:Resource;
@@ -77,9 +78,11 @@
 
 
 [ a r2h:Renderer ;
+    r2h:type doap:Project ;
     r2h:type opengis:Feature ;
     r2h:type s:provider ;
     r2h:type gtfs:Stop ;
+    r2h:type opengis:Geometry ;
     rdfs:comment "Renders a full page, delegating to renderers in the default \n    context for the body, and to gt:HtmlHead for things like the html title" ;
     r2h:context gt:FullPage ;
     r2h:mustache
@@ -187,10 +190,146 @@
 
 
 [ a r2h:Renderer;
-    r2h:type r2h:Resource ;
+    r2h:type doap:Project ;
+    r2h:context r2h:Default ;
+    r2h:mustache """{{@prefix doap: <http://usefulinc.com/ns/doap#>}}
+    {{@prefix rdfs: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>}}
+    {{@prefix gt: <http://rdf2h.github.io/2016/generic-rdf2h-renderers/>}}
+
+    {{#+rdfs:type}}
+    <div class="two column row">
+      <div class="column four wide">
+        <p>Class:</p>
+      </div>
+      <div class="column">
+        {{#rdfs:type}}
+        <p><b><a href="{{{.}}}">{{{.}}}</a></b></p>
+        {{/rdfs:type}}
+      </div>
+    </div>
+    {{/+rdfs:type}}
+
+    {{#+doap:name}}
+    <div class="two column row">
+      <div class="column four wide">
+        <p>Name:</p>
+      </div>
+      <div class="column">
+        <p>{{doap:name}}</p>
+      </div>
+    </div>
+    {{/+doap:name}}
+
+    {{#+doap:shortdesc}}
+    <div class="two column row">
+      <div class="column four wide">
+        <p>Short Description:</p>
+      </div>
+      <div class="column">
+        <p>{{doap:shortdesc}}</p>
+      </div>
+    </div>
+    {{/+doap:shortdesc}}
+
+    {{#+doap:description}}
+    <div class="two column row">
+      <div class="column four wide">
+        <p>Description:</p>
+      </div>
+      <div class="column">
+        <p>{{doap:description}}</p>
+      </div>
+    </div>
+    {{/+doap:description}}
+
+    {{#+doap:homepage}}
+    <div class="two column row">
+      <div class="column four wide">
+        <p>Homepage:</p>
+      </div>
+      <div class="column">
+        {{#doap:homepage}}
+        <p><b><a href="{{{.}}}">{{{.}}}</a></b></p>
+        {{/doap:homepage}}
+      </div>
+    </div>
+    {{/+doap:homepage}}
+
+    {{#+doap:category}}
+    <div class="two column row">
+      <div class="column four wide">
+        <p>category:</p>
+      </div>
+      <div class="column">
+        {{#doap:category}}
+        <p><b><a href="{{{.}}}">{{{.}}}</a></b></p>
+        {{/doap:category}}
+      </div>
+    </div>
+    {{/+doap:category}}
+
+    {{#+doap:programming-language}}
+    <div class="two column row">
+      <div class="column four wide">
+        <p>Programming Language:</p>
+      </div>
+      <div class="column">
+        {{doap:programming-language}}
+      </div>
+    </div>
+    {{/+doap:programming-language}}
+
+    {{#+doap:developer}}
+    <div class="two column row">
+      <div class="column four wide">
+        <p>Developer:</p>
+      </div>
+      <div class="column">
+        {{#doap:developer}}
+          {{{:render . gt:Developer}}}
+        {{/doap:developer}}
+      </div>
+    </div>
+    {{/+doap:developer}}
+
+    {{#+doap:repository}}
+    <div class="two column row">
+      <div class="column four wide">
+        <p>Repository:</p>
+      </div>
+      <div class="column">
+        {{#doap:repository}}
+          {{{:render . gt:Repository}}}
+        {{/doap:repository}}
+      </div>
+    </div>
+    {{/+doap:repository}}
+    """
+].
+
+[ a r2h:Renderer ;
+    r2h:type foaf:Organization ;
+    r2h:context gt:Developer ;
+    r2h:mustache """{{@prefix foaf: <http://xmlns.com/foaf/0.1/>}}
+	  <p>{{foaf:name}}</p>
+    <p>{{#foaf:homepage}}{{{:render . gt:Link}}}{{/foaf:homepage}}</p>
+    """
+].
+
+[ a r2h:Renderer ;
+    r2h:type doap:GitRepository ;
+    r2h:context gt:Repository ;
+    r2h:mustache """{{@prefix doap: <http://usefulinc.com/ns/doap#>}}
+    <p>Git: {{#doap:browse}}{{{:render . gt:Link}}}{{/doap:browse}}</p>
+    """
+].
+
+[ a r2h:Renderer;
+    r2h:type rdfs:Resource ;
     r2h:type opengis:Feature ;
     r2h:type s:provider ;
     r2h:type gtfs:Stop ;
+    r2h:type opengis:Geometry ;
     r2h:context r2h:Default ;
     r2h:mustache """{{@prefix geo: <http://www.geonames.org/ontology#>}}
       {{@prefix rdf: <http://www.w3.org/2000/01/rdf-schema#>}}
@@ -525,6 +664,19 @@
         </div>
       </div>
       {{/+s:sameAs}}
+
+      {{#+opengis:asWKT}}
+      <div class="two column row">
+        <div class="column four wide">
+          <p>As WKT:</p>
+        </div>
+        <div class="column">
+          {{#opengis:asWKT}}
+          <p><b>{{{:render . gt:WKT}}}</b></p>
+          {{/opengis:asWKT}}
+        </div>
+      </div>
+      {{/+opengis:asWKT}}
       """
 ] .
 
@@ -545,6 +697,14 @@
     """
 ].
 
+
+[ a r2h:Renderer ;
+    r2h:type <http://www.openlinksw.com/schemas/virtrdf#Geometry> ;
+    r2h:context gt:WKT ;
+    r2h:mustache """
+	  {{{.}}}
+    """
+].
 
 [ a r2h:Renderer ;
     r2h:type <http://www.w3.org/2000/01/rdf-schema#Resource> ;
