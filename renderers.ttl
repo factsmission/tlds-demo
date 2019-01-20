@@ -202,7 +202,7 @@
       {{@prefix wgs: <http://www.w3.org/2003/01/geo/wgs84_pos#>}}
       {{@prefix geotra: <https://ld.geo.admin.ch/def/transportation/>}}
       {{@prefix ldgeo: <https://ld.geo.admin.ch/def/>}}
-      {{@prefix geo: <http://www.geonames.org/ontology>}}
+      {{@prefix geo: <http://www.geonames.org/ontology#>}}
 
       {{#+s:hasMap}}
       {{{:render . opengis:FeatureMap}}}
