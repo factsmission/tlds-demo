@@ -11,7 +11,7 @@
   doap:category <http://njh.me/Semantic_Web> ;
   doap:programming-language "JAVA" ;
   doap:developer [
-    a foaf:Person ;
+    a foaf:Organization ;
     foaf:name "Factsmission" ;
     foaf:homepage <https://factsmission.com/>
   ] ;
