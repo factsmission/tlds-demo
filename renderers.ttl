@@ -11,72 +11,6 @@
 @prefix gtfs:	<http://vocab.gtfs.org/terms#> .
 @prefix doap: <http://usefulinc.com/ns/doap#> .
 
-<genericResource> a r2h:Renderer;
-    r2h:type rdfs:Resource;
-    r2h:context r2h:Default-Naked;
-    r2h:javaScript """
-        var prefixMappings = [{ns: "http://schema.org/", prefix: "s:"},
-                        {ns: "http://www.w3.org/1999/02/22-rdf-syntax-ns#", prefix: "rdf:"},
-                        {ns: "https://gont.ch/", prefix: "gont:"},
-                        {ns: "http://www.w3.org/2004/02/skos/core#", prefix: "skos:"},
-                        {ns: "http://www.w3.org/2002/07/owl#", prefix: "owl:"},
-                        {ns: "http://dbpedia.org/resource/", prefix: "dbr:"},
-                        {ns: "http://dbpedia.org/class/yago/", prefix: "yago:"},
-                        {ns: "http://xmlns.com/foaf/0.1/", prefix: "foaf:"},
-                        {ns: "http://www.wikidata.org/entity/", prefix: "wikidata:"},
-                        {ns: "http://dbpedia.org/ontology/", prefix: "dbo:"},
-                        {ns: "http://pns.org/dc/terms/", prefix: "dct:"},
-                        {ns: "http://www.w3.org/2000/01/rdf-schema#", prefix: "rdfs:"}];
-        function styleUri(uri) {
-            var mapping = prefixMappings.find(function(mappping) {
-                return uri.startsWith(mappping.ns);
-            });
-            if (mapping) {
-                return mapping.prefix+"<b>"+uri.substring(mapping.ns.length)+"</b>";
-            } else {
-                return uri;
-            }
-        }
-        var result = "";
-        var predicatesArray = [];
-        var nodesToRender = [];
-        //should rather attach this to something specific to this RDF2h invocation
-        console.log(env);
-		if (!env.renderedNodesToId)  {
-			env.renderedNodesToId = new Object();
-		}
-
-    """
-.
-
-
-[ a r2h:Renderer ;
-    r2h:context gt:EmptyPage ;
-    r2h:mustache """
-    @prefix doap: <http://usefulinc.com/ns/doap#> .
-    @prefix foaf: <http://xmlns.com/foaf/0.1/> .
-
-    [ a doap:Project ;
-      doap:name "TLDS demo " ;
-      doap:shortdesc "A linked data explorer based on TLDS and data from geo.admin.ch." ;
-      doap:description "A linked data explorer based on TLDS (https://github.com/linked-solutions/tlds) based on geographical data from geo.admin.ch. Configured in turtle." ;
-      doap:homepage <https://tlds-demo.factsmission.org> ;
-      doap:category <http://njh.me/Semantic Web> ;
-      doap:programming-language "JAVA" ;
-      doap:developer [
-        a foaf:Person ;
-        foaf:name "Factsmission" ;
-        foaf:homepage <https://factsmission.com/>
-      ] ;
-      doap:repository [
-        a doap:GitRepository ;
-        doap:browse <https://github.com/factsmission/tlds-demo>
-      ] .
-    ].
-    """
-] .
-
-
 [ a r2h:Renderer ;
     r2h:type doap:Project ;
     r2h:type opengis:Feature ;
@@ -162,16 +96,6 @@
             </body>""" ;
 <http://rdf2h.github.io/2015/rdf2h#type>
         <http://www.w3.org/2000/01/rdf-schema#Resource>
-] .
-
-
-[ a       <http://rdf2h.github.io/2015/rdf2h#Renderer> ;
-  <http://rdf2h.github.io/2015/rdf2h#context>
-          <http://rdf2h.github.io/2015/rdf2h#Tail> ;
-  <http://rdf2h.github.io/2015/rdf2h#mustache>
-          "\n   {{{@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>}}}\n    {{#+rdfs:seeAlso}}\n      <div class=\"seeAlso\">\n        See also:\n        <ul>\n          {{#rdfs:seeAlso}}\n            <li>\n              <a href=\"{{{.}}}\">{{.}}</a>\n            </li>\n          {{/rdfs:seeAlso}}\n        </ul>\n      </div>\n    {{/+rdfs:seeAlso}}\n    {{#+rdfs:seeAlso<-}}\n      <div class=\"seeAlso\">\n        Inverse see also:\n        <ul>\n          {{#rdfs:seeAlso<-}}\n            <li>\n              <a href=\"{{{.}}}\">{{.}}</a>\n            </li>\n          {{/rdfs:seeAlso<-}}\n        </ul>\n      </div>\n    {{/+rdfs:seeAlso<-}}\n    " ;
-  <http://rdf2h.github.io/2015/rdf2h#type>
-          <http://schema.org/Article>
 ] .
 
 <genericHead> a r2h:Renderer;
