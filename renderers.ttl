@@ -273,15 +273,19 @@
       {{{:render . opengis:FeatureMap}}}
       {{/+s:hasMap}}
 
-      {{#+s:name}}
+      
       <div class="one column row">
-        <div class="column">   
+        <div class="column"> 
           <div class="ui grid">   
+            {{#+s:name}}    
             <div class="one column row">
               <div class="centered column">
-                <h3>{{s:name}}</h3>
+                {{#s:name}}
+                <h3>{{.}}</h3>
+                {{/s:name}}
               </div>
             </div>
+            {{/+s:name}}
             {{#+rdf:seeAlso}} 
             <div class="one column row">
               {{#rdf:seeAlso}} 
@@ -297,7 +301,7 @@
           </div>
         </div>
       </div>
-      {{/+s:name}}
+  
 
       {{#+rdfs:type}}
       <div class="two column row">
