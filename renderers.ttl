@@ -641,7 +641,7 @@
         </div>
         {{#rdf:seeAlso}} 
         <div class="fetch" resource="{{{.}}}" 
-            graph="https://query.wikidata.org/sparql?query=construct%7B%3C{{{.}}}%3E%20%3Fp%20%3Fo%7D%0D%0Awhere%20%7B%0D%0A%3C{{{.}}}%3E%20%3Fp%20%3Fo%20.%0D%0A%7D" 
+            graph="https://query.wikidata.org/sparql?query=construct%7B%3C{{{.}}}%3E%20wdt%3AP94%20%3Fo%20.%0A%3C{{{.}}}%3E%20wdt%3AP18%20%3Foo%20.%0A%3C{{{.}}}%3E%20wdt%3AP242%20%3Fooo%20.%0A%7D%0Awhere%20%7B%0A%3C{{{.}}}%3E%20wdt%3AP94%20%3Fo%20.%0A%3C{{{.}}}%3E%20wdt%3AP18%20%3Foo%20.%0A%3C{{{.}}}%3E%20wdt%3AP242%20%3Fooo%20.%0A%7D" 
             context="http://rdf2h.github.io/2015/rdf2h#wikidata">
         </div>
         {{/rdf:seeAlso}}
