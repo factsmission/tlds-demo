@@ -50,9 +50,6 @@
                       {{{:render . r2h:Default}}}
                     </div>
                   </div>
-                  <div class="fetch" resource="http://lod.opentransportdata.swiss/didok/8504300" 
-        graph="https://lod.opentransportdata.swiss/query?query=DESCRIBE%20%3Chttp%3A%2F%2Flod.opentransportdata.swiss%2Fdidok%2F8504300%3E" 
-        context="http://rdf2h.github.io/2015/rdf2h#Default">....</div>
 
                   <div class="ui hidden divider"></div>
                 </div>
@@ -274,13 +271,6 @@
       {{#+s:hasMap}}
       {{{:render . opengis:FeatureMap}}}
       {{/+s:hasMap}}
-
-
-      {{#rdf:seeAlso}}   
-      <div class="fetch" resource="{{{.}}}" 
-      graph="https%3A%2F%2Fquery.wikidata.org%2Fsparql%3Fquery%3Dconstruct%7B%3C{{{.}}}%3E%20%3Fp%20%3Fo%7D%0D%0Awhere%20%7B%0D%0A%3C{{{.}}}%3E%20%3Fp%20%3Fo%20.%0D%0A%7D" 
-      context="http://rdf2h.github.io/2015/rdf2h#wikidata">....</div>
-      {{/rdf:seeAlso}}
 
       {{#+rdfs:type}}
       <div class="two column row">
@@ -612,7 +602,20 @@
         </div>
       </div>
       {{/+opengis:asWKT}}
-      """
+
+        
+      <div class="two column row">
+        <div class="column four wide">
+          <p>From Wikidata:</p>
+        </div>
+          {{#rdf:seeAlso}} 
+        <div class="fetch" resource="{{{.}}}" 
+            graph="https://query.wikidata.org/sparql?query=construct%7B%3C{{{.}}}%3E%20%3Fp%20%3Fo%7D%0D%0Awhere%20%7B%0D%0A%3C{{{.}}}%3E%20%3Fp%20%3Fo%20.%0D%0A%7D" 
+            context="http://rdf2h.github.io/2015/rdf2h#wikidata">
+        </div>
+      {{/rdf:seeAlso}}
+      </div>
+    """
 ] .
 
 [ a r2h:Renderer ;
@@ -628,8 +631,11 @@
     r2h:context r2h:wikidata ;
     r2h:mustache """{{@prefix wdt: <http://www.wikidata.org/prop/direct/>}}
     {{#wdt:P94}}
-	  <img src="{{.}}" alt="Coat Of Arm" height="42" width="42">
+	  <img src="{{.}}" alt="Coat Of Arm" height="200" >
     {{/wdt:P94}}
+    {{#wdt:P18}}
+	  <img src="{{.}}" alt="Image" height="200">
+    {{/wdt:P18}}
     """
 ].
 
