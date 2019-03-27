@@ -24,6 +24,7 @@
         {{{@prefix r2h: <http://rdf2h.github.io/2015/rdf2h#>}}}
         {{{@prefix gt: <http://rdf2h.github.io/2016/generic-rdf2h-Renderers/>}}}
         {{{@prefix s: <http://schema.org/>}}}
+        {{{@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>}}}
             <head>
               <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"/>
               <!--<link rel='stylesheet' href='http://localhost:8080/style.css' />-->
@@ -50,6 +51,7 @@
                       {{{:render . r2h:Default}}}
                     </div>
                   </div>
+
                   <div class="ui hidden divider"></div>
                 </div>
                 <footer class="ui inverted vertical dividing footer segment form-page padded">
@@ -270,6 +272,32 @@
       {{#+s:hasMap}}
       {{{:render . opengis:FeatureMap}}}
       {{/+s:hasMap}}
+
+      {{#+s:name}}
+      <div class="one column row">
+        <div class="column">   
+          <div class="ui grid">   
+            <div class="one column row">
+              <div class="centered column">
+                <h3>{{s:name}}</h3>
+              </div>
+            </div>
+            {{#+rdf:seeAlso}} 
+            <div class="one column row">
+              {{#rdf:seeAlso}} 
+              <div class="ten wide centered column">
+                <div class="fetch" resource="{{{.}}}" 
+                    graph="https://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=CONSTRUCT+%7B%3C{{{.}}}%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fabstract%3E+%3Fabstract%7D%0D%0AWHERE+%7B%0D%0A++%3Fs+%3Chttp%3A%2F%2Fwww.w3.org%2F2002%2F07%2Fowl%23sameAs%3E+%3C{{.}}%3E+.%0D%0A++%3Fs+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fabstract%3E+%3Fabstract+.%0D%0A%0D%0A++FILTER%28LANGMATCHES%28LANG%28%3Fabstract%29%2C+%27en%27%29%29%0D%0A%7D%0D%0A&format=text%2Fturtle&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on&run=+Run+Query+" 
+                    context="http://rdf2h.github.io/2015/rdf2h#Abstract">
+                </div>
+              </div>
+              {{/rdf:seeAlso}}
+            </div>
+            {{/+rdf:seeAlso}} 
+          </div>
+        </div>
+      </div>
+      {{/+s:name}}
 
       {{#+rdfs:type}}
       <div class="two column row">
@@ -601,7 +629,21 @@
         </div>
       </div>
       {{/+opengis:asWKT}}
-      """
+
+      {{#+rdf:seeAlso}} 
+      <div class="two column row">
+        <div class="column four wide">
+          <p>Images from wikimedia project:</p>
+        </div>
+        {{#rdf:seeAlso}} 
+        <div class="fetch" resource="{{{.}}}" 
+            graph="https://query.wikidata.org/sparql?query=construct%7B%3C{{{.}}}%3E%20%3Fp%20%3Fo%7D%0D%0Awhere%20%7B%0D%0A%3C{{{.}}}%3E%20%3Fp%20%3Fo%20.%0D%0A%7D" 
+            context="http://rdf2h.github.io/2015/rdf2h#wikidata">
+        </div>
+        {{/rdf:seeAlso}}
+      </div>
+      {{/+rdf:seeAlso}} 
+    """
 ] .
 
 [ a r2h:Renderer ;
@@ -611,6 +653,34 @@
 	  <a href="{{.}}">{{{.}}}</a>
     """
 ].
+
+[ a r2h:Renderer ;
+    r2h:type rdfs:Resource ;
+    r2h:context r2h:Abstract ;
+    r2h:mustache """
+    {{@prefix dbo: <http://dbpedia.org/ontology/>}}
+	  {{#dbo:abstract}}
+	    {{.}}
+	  {{/dbo:abstract}}
+    """
+].
+
+[ a r2h:Renderer ;
+    r2h:type rdfs:Resource ;
+    r2h:context r2h:wikidata ;
+    r2h:mustache """{{@prefix wdt: <http://www.wikidata.org/prop/direct/>}}
+    {{#wdt:P94}}
+	  <a href="{{.}}"><img src="{{.}}" alt="Coat Of Arm" height="200" > </a>
+    {{/wdt:P94}}
+    {{#wdt:P18}}
+	  <a href="{{.}}"><img src="{{.}}" alt="image" height="200"> </a>
+    {{/wdt:P18}}
+    {{#wdt:P242}}
+	  <a href="{{.}}"><img src="{{.}}" alt="map" height="200"> </a>
+    {{/wdt:P242}}
+    """
+].
+
 
 [ a r2h:Renderer ;
     r2h:type <http://www.w3.org/2001/XMLSchema#date> ;
