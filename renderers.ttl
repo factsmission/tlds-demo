@@ -278,8 +278,8 @@
         <div class="column">   
           <div class="ui grid">   
             <div class="one column row">
-              <div class="ten wide centered column">
-                <h2>{{s:name}}</h2>
+              <div class="centered column">
+                <h3>{{s:name}}</h3>
               </div>
             </div>
             {{#+rdf:seeAlso}} 
