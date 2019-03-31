@@ -54,8 +54,8 @@
                     <div class="four wide center aligned column"><img class="ui middle aligned image" src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Flag-map_of_Switzerland.svg" onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/3/3b/Flag-map_of_Switzerland.svg'" style=" height: auto; max-width: 400px; max-height: 120px;"></div>
 
                     <div class="ten wide column">
-                      <h1>A new dress to geo.admin.ch</h1>
-                      <p class='subheader'>Proudly turtle configurated</p>
+                      <h1>Linked Data App on Swiss Municipalities</h1>
+                      <p class='subheader'>A TLDS Demo</p>
                     </div>
                   </div>
                   <div class="ui hidden divider"></div>
