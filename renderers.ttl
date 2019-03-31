@@ -74,11 +74,11 @@
                   <div class="ui grid container">
                     <div class="ui eleven wide column">
                       <div class="ui container">
-                        This project is a <a href="https://github.com/factsmission/tlds">TLDS</a> demo based on the data from <a href="https://www.geo.admin.ch">geo.admin.ch</a> by <a href="https://factsmission.com">FactsMission</a>.
+                        This project is a <a href="https://github.com/linked-solutions/tlds">TLDS</a> demo based on the data from <a href="https://www.geo.admin.ch">geo.admin.ch</a> by <a href="https://factsmission.com">FactsMission</a>.
                       </div>
                       <div class="ui hidden divider"></div>
                       <div class="ui aligned container">
-                        Check the source-code on <a href="https://github.com/linked-solutions/tlds-demo" style="color: white;"><i class="large github icon"></i></a>
+                        Check the source-code on <a href="https://github.com/factsmission/tlds-demo" style="color: white;"><i class="large github icon"></i></a>
                         <div class="ui divider"></div>
                       </div>
                       <div class="ui container">
