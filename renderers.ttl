@@ -26,13 +26,28 @@
         {{{@prefix s: <http://schema.org/>}}}
         {{{@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>}}}
             <head>
-              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"/>
+              <style>
+                .inv {
+                  display: none !important;
+                }
+              </style>
+              <script>
+                document.body.classList.add('inv');
+              </script>
+              <link rel="stylesheet" id="semanticcss" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"/>
+              <script>
+              var e = document.getElementById("semanticcss");
+              e.onload = function () {
+                document.body.classList.remove('inv');
+              };
+              </script>
               <!--<link rel='stylesheet' href='http://localhost:8080/style.css' />-->
               <title>{{.}}</title>
-              <style></style>
+              <style>
+              </style>
             </head>
             <body>
-              <div style="display: flex; min-height: 100vh; flex-direction: column;">
+              <div class="main" style="display: flex; min-height: 100vh; flex-direction: column;">
                 <header class="ui container">
                   <div class="ui hidden divider"></div>
                   <div class="ui two column stackable grid">
