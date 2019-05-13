@@ -31,7 +31,7 @@
                   display: none !important;
                 }
                 .imagegrid {display:flex;flex-wrap:wrap;}
-                .imagegrid>a {display:flex;flex:1;border:1px solid rgba(0,0,0,.1);}
+                .imagegrid>a {display:flex;flex:1;}
                 .imagegrid>a>img {height:200px;margin:auto}
               </style>
               <script>
@@ -291,34 +291,21 @@
             {{{:render . opengis:FeatureMap}}}
           </div>
         {{/+s:hasMap}}
-        <div class="one column row">
-          <div class="column"> 
-            <div class="ui grid">   
-              {{#+s:name}}    
-              <div class="one column row">
-                <div class="centered column">
-                  {{#s:name}}
-                  <h3>{{.}}</h3>
-                  {{/s:name}}
-                </div>
-              </div>
-              {{/+s:name}}
-              {{#+rdf:seeAlso}} 
-              <div class="one column row">
-                {{#rdf:seeAlso}} 
-                <div class="ten wide centered column">
-                  <div class="fetch" resource="{{{.}}}" 
-                      graph="https://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=CONSTRUCT+%7B%3C{{{.}}}%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fabstract%3E+%3Fabstract%7D%0D%0AWHERE+%7B%0D%0A++%3Fs+%3Chttp%3A%2F%2Fwww.w3.org%2F2002%2F07%2Fowl%23sameAs%3E+%3C{{.}}%3E+.%0D%0A++%3Fs+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fabstract%3E+%3Fabstract+.%0D%0A%0D%0A++FILTER%28LANGMATCHES%28LANG%28%3Fabstract%29%2C+%27en%27%29%29%0D%0A%7D%0D%0A&format=text%2Fturtle&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on&run=+Run+Query+" 
-                      context="http://rdf2h.github.io/2015/rdf2h#Abstract">
-                  </div>
-                </div>
-                {{/rdf:seeAlso}}
-              </div>
-              {{/+rdf:seeAlso}} 
-            </div>
+
+        {{#+s:name}}
+          <div class="ui item">  
+            <h1 class="header">{{s:name}}</h1>
           </div>
-        </div>
-  
+        {{/+s:name}}
+
+        {{#rdf:seeAlso}}
+          <div class="ui item"> 
+            <p class="fetch" resource="{{{.}}}" 
+                graph="https://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=CONSTRUCT+%7B%3C{{{.}}}%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fabstract%3E+%3Fabstract%7D%0D%0AWHERE+%7B%0D%0A++%3Fs+%3Chttp%3A%2F%2Fwww.w3.org%2F2002%2F07%2Fowl%23sameAs%3E+%3C{{.}}%3E+.%0D%0A++%3Fs+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fabstract%3E+%3Fabstract+.%0D%0A%0D%0A++FILTER%28LANGMATCHES%28LANG%28%3Fabstract%29%2C+%27en%27%29%29%0D%0A%7D%0D%0A&format=text%2Fturtle&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on&run=+Run+Query+" 
+                context="http://rdf2h.github.io/2015/rdf2h#Abstract">
+            </p>
+          </div>
+        {{/rdf:seeAlso}} 
 
         {{#+rdfs:type}}
         <div class="two column row">
