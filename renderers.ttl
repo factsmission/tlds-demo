@@ -27,12 +27,14 @@
         {{{@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>}}}
             <head>
               <style>
-                .inv {
-                  display: none !important;
-                }
+                .inv {display: none !important;}
                 .imagegrid {display:flex;flex-wrap:wrap;}
                 .imagegrid>a {display:flex;flex:1;}
                 .imagegrid>a>img {height:200px;margin:auto}
+                .item {flex-wrap:wrap;}
+                .scroll-x {overflow-x:auto;width:100%;}
+                .ui.segment.pseudo {padding:0;box-shadow:none;}
+                .ui.segment.pseudo>table {border:none;}
               </style>
               <script>
                 document.body.classList.add('inv');
@@ -273,7 +275,7 @@
     r2h:type gtfs:Stop ;
     r2h:type opengis:Geometry ;
     r2h:context r2h:Default ;
-    r2h:mustache """{{@prefix geo: <http://www.geonames.org/ontology#>}}
+    r2h:mustache """
       {{@prefix rdf: <http://www.w3.org/2000/01/rdf-schema#>}}
       {{@prefix dc: <http://purl.org/dc/terms/>}}
       {{@prefix s: <http://schema.org/>}}
@@ -292,11 +294,25 @@
           </div>
         {{/+s:hasMap}}
 
-        {{#+s:name}}
-          <div class="ui item">  
-            <h1 class="header">{{s:name}}</h1>
+        <div class="ui item">
+          <div class="content">  
+            {{#+s:name}}
+              <h1 class="ui header">{{s:name}}</h1>
+            {{/+s:name}}
+            {{#s:alternateName}}
+              <p class="ui sub header">{{{:render . gt:Link}}}</p>
+            {{/s:alternateName}}
+            {{#+geo:countryCode}}
+              <p class="ui sub header">{{{geo:countryCode}}}</p>
+            {{/+geo:countryCode}}
+            {{#+dc:identifier}}
+              <p class="ui sub header">{{{ldgeo:bfsNumber}}}</p>
+            {{/+dc:identifier}}
+            {{#+ldgeo:bfsNumber}}
+              <p class="ui sub header">{{{ldgeo:bfsNumber}}}</p>
+            {{/+ldgeo:bfsNumber}}
           </div>
-        {{/+s:name}}
+        </div>
 
         {{#rdf:seeAlso}}
           <div class="ui item"> 
@@ -320,17 +336,6 @@
         </div>
         {{/+rdfs:type}}
 
-        {{#+s:name}}
-        <div class="two column row">
-          <div class="column four wide">
-            <p>Has Name:</p>
-          </div>
-          <div class="column">
-            <p><b>{{{s:name}}}</b></p>
-          </div>
-        </div>
-        {{/+s:name}}
-
         {{#+s:alternateName}}
         <div class="two column row">
           <div class="column four wide">
@@ -344,27 +349,16 @@
         </div>
         {{/+s:alternateName}}
 
-
         {{#+dc:identifier}}
-        <div class="two column row">
-          <div class="column four wide">
-            <p>Has Identifier:</p>
+          <div class="ui item">
+            <p>Identifier: <strong>{{{ldgeo:bfsNumber}}}</strong></p>
           </div>
-          <div class="column">
-            <p><b>{{{dc:identifier}}}</b></p>
-          </div>
-        </div>
         {{/+dc:identifier}}
 
         {{#+ldgeo:bfsNumber}}
-        <div class="two column row">
-          <div class="column four wide">
-            <p>Has Identifier:</p>
+          <div class="ui item">
+            <p>BFS Number: <strong>{{{ldgeo:bfsNumber}}}</strong></p>
           </div>
-          <div class="column">
-            <p><b>{{{ldgeo:bfsNumber}}}</b></p>
-          </div>
-        </div>
         {{/+ldgeo:bfsNumber}}
 
         {{#+s:provider}}
@@ -380,7 +374,6 @@
         </div>
         {{/+s:provider}}
 
-
         {{#+geo:parentCountry}}
         <div class="two column row">
           <div class="column four wide">
@@ -393,7 +386,6 @@
           </div>
         </div>
         {{/+geo:parentCountry}}
-
 
         {{#+geo:parentADM1}}
         <div class="two column row">
@@ -421,7 +413,6 @@
         </div>
         {{/+geo:parentADM2}}
 
-
         {{#+geo:population}}
         <div class="two column row">
           <div class="column four wide">
@@ -432,7 +423,6 @@
           </div>
         </div>
         {{/+geo:population}}
-
 
         {{#+wgs:long}}
         <div class="two column row">
@@ -481,7 +471,6 @@
           </div>
         </div>
         {{/+s:provider}}
-
 
         {{#+s:releaseDate}}
         <div class="two column row">
@@ -561,18 +550,6 @@
         </div>
         {{/+geotra:meansOfTransportation}}
 
-
-        {{#+geo:countryCode}}
-        <div class="two column row">
-          <div class="column four wide">
-            <p>Country code:</p>
-          </div>
-          <div class="column">
-            <p><b>{{{geo:countryCode}}}</b></p>
-          </div>
-        </div>
-        {{/+geo:countryCode}}
-
         {{#+rdf:seeAlso}}
         <div class="two column row">
           <div class="column four wide">
@@ -587,16 +564,16 @@
         {{/+rdf:seeAlso}}
 
         {{#+dc:hasVersion}}
-        <div class="two column row">
-          <div class="column four wide">
-            <p>Has Version:</p>
-          </div>
-          <div class="column">
+          <div class="item">
+          <h3 class="ui header">
+            Versions
+          </h3>
             {{#dc:hasVersion}}
-            <p><b>{{{:render . gt:Link}}}</b></p>
+              <div class='scroll-x ui segment pseudo'>
+                <table class='ui celled table fetch' resource="{{{.}}}" context="http://rdf2h.github.io/2016/generic-rdf2h-renderers/Card"></table>
+              </div>
             {{/dc:hasVersion}}
-          </div>
-        </div>
+          </div>  
         {{/+dc:hasVersion}}
 
         {{#+dc:isVersionOf}}
@@ -637,21 +614,21 @@
           </div>
         </div>
         {{/+opengis:asWKT}}
-      </div>
 
-      {{#+rdf:seeAlso}}
-        <div class="ui item">
-          <h3 class="ui header">
-            Images from wikimedia
-          </h3>
-          {{#rdf:seeAlso}}
-            <div class="fetch imagegrid" resource="{{{.}}}" 
-                graph="https://query.wikidata.org/sparql?query=construct%7B%3C{{{.}}}%3E%20wdt%3AP94%20%3Fo%20.%0A%3C{{{.}}}%3E%20wdt%3AP18%20%3Foo%20.%0A%3C{{{.}}}%3E%20wdt%3AP242%20%3Fooo%20.%0A%7D%0Awhere%20%7B%0A%3C{{{.}}}%3E%20wdt%3AP94%20%3Fo%20.%0A%3C{{{.}}}%3E%20wdt%3AP18%20%3Foo%20.%0A%3C{{{.}}}%3E%20wdt%3AP242%20%3Fooo%20.%0A%7D" 
-                context="http://rdf2h.github.io/2015/rdf2h#wikidata">
-            </div>
-          {{/rdf:seeAlso}}
-        </div>
-      {{/+rdf:seeAlso}}
+        {{#+rdf:seeAlso}}
+          <div class="ui item">
+            <h3 class="ui header">
+              Images from wikimedia
+            </h3>
+            {{#rdf:seeAlso}}
+              <div class="fetch imagegrid" resource="{{{.}}}" 
+                  graph="https://query.wikidata.org/sparql?query=construct%7B%3C{{{.}}}%3E%20wdt%3AP94%20%3Fo%20.%0A%3C{{{.}}}%3E%20wdt%3AP18%20%3Foo%20.%0A%3C{{{.}}}%3E%20wdt%3AP242%20%3Fooo%20.%0A%7D%0Awhere%20%7B%0A%3C{{{.}}}%3E%20wdt%3AP94%20%3Fo%20.%0A%3C{{{.}}}%3E%20wdt%3AP18%20%3Foo%20.%0A%3C{{{.}}}%3E%20wdt%3AP242%20%3Fooo%20.%0A%7D" 
+                  context="http://rdf2h.github.io/2015/rdf2h#wikidata">
+              </div>
+            {{/rdf:seeAlso}}
+          </div>
+        {{/+rdf:seeAlso}}
+      </div>
     """
 ] .
 
@@ -727,6 +704,22 @@
     """
 ].
 
+[ a r2h:Renderer ;
+    r2h:type rdfs:Resource;
+    r2h:context gt:Card;
+    r2h:javaScript """
+      let content = '<tbody>';
+      let s = n.graph.match(n.node, undefined, undefined);
+      console.log(n);
+      if (s.length > 0) {
+        s.forEach(function(t) {
+          content += `<tr><td><a href='${t.predicate.value}'>${t.predicate.value}</a></td><td>${t.object.value.replace(/&/g,'&amp;')}</td></tr>`;
+        });
+      }
+      let result = `<thead><tr><th colspan='2'><a href=${n.value}>${n.value}</a></th></tr></thead>${content}</tbody>`;
+      print(result);
+    """
+].
 
 
 [ a r2h:Renderer ;
