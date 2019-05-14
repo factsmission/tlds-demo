@@ -28,12 +28,14 @@
             <head>
               <style>
                 .inv {display: none !important;}
-                .imagegrid {display:flex;flex-wrap:wrap;}
-                .imagegrid>a {display:flex;flex:1;}
-                .imagegrid>a>img {height:200px;margin:auto}
+                .imagegrid {display:flex;flex-wrap:nowrap;}
+                .imagegrid>a {display:block;flex:1;margin:1rem 0 1rem 1rem}
+                .imagegrid>a:last-child {padding-right:1rem;}
+                .imagegrid>a>img {height:300px;margin:auto;}
                 .item {flex-wrap:wrap;}
                 .scroll-x {overflow-x:auto;width:100%;}
                 .ui.segment.pseudo {padding:0;box-shadow:none;}
+                .ui.segment.pseudo:blank {display:none;}
                 .ui.segment.pseudo>table {border:none;}
               </style>
               <script>
@@ -323,297 +325,24 @@
           </div>
         {{/rdf:seeAlso}} 
 
-        {{#+rdfs:type}}
-        <div class="two column row">
-          <div class="column four wide">
-            <p>Class:</p>
-          </div>
-          <div class="column">
-            {{#rdfs:type}}
-            <p><b><a href="{{{.}}}">{{{.}}}</a></b></p>
-            {{/rdfs:type}}
-          </div>
+        <div class="item">
+            <div class='scroll-x ui segment pseudo'>
+              <table class='ui celled table fetch' resource="{{{.}}}" context="http://rdf2h.github.io/2016/generic-rdf2h-renderers/Card"></table>
+            </div>
         </div>
-        {{/+rdfs:type}}
-
-        {{#+s:alternateName}}
-        <div class="two column row">
-          <div class="column four wide">
-            <p>Has Alternate Name:</p>
-          </div>
-          <div class="column">
-            {{#s:alternateName}}
-            <p><b>{{{:render . gt:Link}}}</b></p>
-            {{/s:alternateName}}
-          </div>
-        </div>
-        {{/+s:alternateName}}
-
-        {{#+dc:identifier}}
-          <div class="ui item">
-            <p>Identifier: <strong>{{{ldgeo:bfsNumber}}}</strong></p>
-          </div>
-        {{/+dc:identifier}}
-
-        {{#+ldgeo:bfsNumber}}
-          <div class="ui item">
-            <p>BFS Number: <strong>{{{ldgeo:bfsNumber}}}</strong></p>
-          </div>
-        {{/+ldgeo:bfsNumber}}
-
-        {{#+s:provider}}
-        <div class="two column row">
-          <div class="column four wide">
-            <p>Has Provider:</p>
-          </div>
-          <div class="column">
-            {{#s:provider}}
-            <p><b>{{{:render . gt:Link}}}</b></p>
-            {{/s:provider}}
-          </div>
-        </div>
-        {{/+s:provider}}
-
-        {{#+geo:parentCountry}}
-        <div class="two column row">
-          <div class="column four wide">
-            <p>Parent Country:</p>
-          </div>
-          <div class="column">
-            {{#geo:parentCountry}}
-            <p><b>{{{:render . gt:Link}}}</b></p>
-            {{/geo:parentCountry}}
-          </div>
-        </div>
-        {{/+geo:parentCountry}}
-
-        {{#+geo:parentADM1}}
-        <div class="two column row">
-          <div class="column four wide">
-            <p>Has Parent ADM1:</p>
-          </div>
-          <div class="column">
-            {{#geo:parentADM1}}
-            <p><b>{{{:render . gt:Link}}}</b></p>
-            {{/geo:parentADM1}}
-          </div>
-        </div>
-        {{/+geo:parentADM1}}
-
-        {{#+geo:parentADM2}}
-        <div class="two column row">
-          <div class="column four wide">
-            <p>Has Parent ADM2:</p>
-          </div>
-          <div class="column">
-            {{#geo:parentADM2}}
-            <p><b>{{{:render . gt:Link}}}</b></p>
-            {{/geo:parentADM2}}
-          </div>
-        </div>
-        {{/+geo:parentADM2}}
-
-        {{#+geo:population}}
-        <div class="two column row">
-          <div class="column four wide">
-            <p>Has Population:</p>
-          </div>
-          <div class="column">
-            <p><b>{{{geo:population}}}</b></p>
-          </div>
-        </div>
-        {{/+geo:population}}
-
-        {{#+wgs:long}}
-        <div class="two column row">
-          <div class="column four wide">
-            <p>Has Localization:</p>
-          </div>
-          <div class="column">
-            {{{:render . gt:Position}}}
-          </div>
-        </div>
-        {{/+wgs:long}}
-
-        {{#+opengis:hasGeometry}}
-        <div class="two column row">
-          <div class="column four wide">
-            <p>Has Shape:</p>
-          </div>
-          <div class="column">
-            <p><b>{{{:render . gt:Shape}}}</b></p>
-          </div>
-        </div>
-        {{/+opengis:hasGeometry}}
-
-        {{#+s:provider}}
-        <div class="two column row">
-          <div class="column four wide">
-            <p>Has Provider:</p>
-          </div>
-          <div class="column">
-            {{#s:provider}}
-            <p><b>{{{:render . gt:Link}}}</b></p>
-            {{/s:provider}}
-          </div>
-        </div>
-        {{/+s:provider}}
-
-        {{#+s:provider}}
-        <div class="two column row">
-          <div class="column four wide">
-            <p>Has Provider:</p>
-          </div>
-          <div class="column">
-            {{#s:provider}}
-            <p><b>{{{:render . gt:Link}}}</b></p>
-            {{/s:provider}}
-          </div>
-        </div>
-        {{/+s:provider}}
-
-        {{#+s:releaseDate}}
-        <div class="two column row">
-          <div class="column four wide">
-            <p>Release Date:</p>
-          </div>
-          <div class="column">
-            {{#s:releaseDate}}
-            <p><b>{{{:render . gt:Date}}}</b></p>
-            {{/s:releaseDate}}
-          </div>
-        </div>
-        {{/+s:releaseDate}}
-
-        {{#+s:dateModified}}
-        <div class="two column row">
-          <div class="column four wide">
-            <p>Date Modified:</p>
-          </div>
-          <div class="column">
-            {{#s:dateModified}}
-            <p><b>{{{:render . gt:Date}}}</b></p>
-            {{/s:dateModified}}
-          </div>
-        </div>
-        {{/+s:dateModified}}
-
-        {{#+s:validFrom}}
-        <div class="two column row">
-          <div class="column four wide">
-            <p>Valid From:</p>
-          </div>
-          <div class="column">
-            {{#s:validFrom}}
-            <p><b>{{{:render . gt:Date}}}</b></p>
-            {{/s:validFrom}}
-          </div>
-        </div>
-        {{/+s:validFrom}}
-
-        {{#+s:validUntil}}
-        <div class="two column row">
-          <div class="column four wide">
-            <p>Valid Until:</p>
-          </div>
-          <div class="column">
-            {{#s:validUntil}}
-            <p><b>{{{:render . gt:Date}}}</b></p>
-            {{/s:validUntil}}
-          </div>
-        </div>
-        {{/+s:validUntil}}
-
-        {{#+dc:issued}}
-        <div class="two column row">
-          <div class="column four wide">
-            <p>Issued:</p>
-          </div>
-          <div class="column">
-            {{#dc:issued}}
-            <p><b>{{{:render . gt:Date}}}</b></p>
-            {{/dc:issued}}
-          </div>
-        </div>
-        {{/+dc:issued}}
-
-        {{#+geotra:meansOfTransportation}}
-        <div class="two column row">
-          <div class="column four wide">
-            <p>Has Means of Transportation:</p>
-          </div>
-          <div class="column">
-            {{#geotra:meansOfTransportation}}
-            <p><b>{{{:render . gt:Link}}}</b></p>
-            {{/geotra:meansOfTransportation}}
-          </div>
-        </div>
-        {{/+geotra:meansOfTransportation}}
-
-        {{#+rdf:seeAlso}}
-        <div class="two column row">
-          <div class="column four wide">
-            <p>See also:</p>
-          </div>
-          <div class="column">
-            {{#rdf:seeAlso}}
-            <p><b><a href="{{{.}}}">{{{.}}}</a></b></p>
-            {{/rdf:seeAlso}}
-          </div>
-        </div>
-        {{/+rdf:seeAlso}}
 
         {{#+dc:hasVersion}}
-          <div class="item">
+          <div class="item ui segment">
           <h3 class="ui header">
             Versions
           </h3>
             {{#dc:hasVersion}}
               <div class='scroll-x ui segment pseudo'>
-                <table class='ui celled table fetch' resource="{{{.}}}" context="http://rdf2h.github.io/2016/generic-rdf2h-renderers/Card"></table>
+                <table class='ui celled table'><thead><tr><th colspan='2'><a href={{{.}}}>{{.}}</a></th></tr></thead><tbody class='fetch' resource="{{{.}}}" context="http://rdf2h.github.io/2016/generic-rdf2h-renderers/Card"></tbody></table>
               </div>
             {{/dc:hasVersion}}
           </div>  
         {{/+dc:hasVersion}}
-
-        {{#+dc:isVersionOf}}
-        <div class="two column row">
-          <div class="column four wide">
-            <p>Is Version Of:</p>
-          </div>
-          <div class="column">
-            {{#dc:isVersionOf}}
-            <p><b>{{{:render . gt:Link}}}</b></p>
-            {{/dc:isVersionOf}}
-          </div>
-        </div>
-        {{/+dc:isVersionOf}}
-
-        {{#+s:sameAs}}
-        <div class="two column row">
-          <div class="column four wide">
-            <p>Same As:</p>
-          </div>
-          <div class="column">
-            {{#s:sameAs}}
-            <p><b>{{{:render . gt:Link}}}</b></p>
-            {{/s:sameAs}}
-          </div>
-        </div>
-        {{/+s:sameAs}}
-
-        {{#+opengis:asWKT}} 
-        <div class="two column row">
-          <div class="column four wide">
-            <p>As WKT:</p>
-          </div>
-          <div class="column">s
-            {{#opengis:asWKT}}
-            <p><b>{{{:render . gt:WKT}}}</b></p>
-            {{/opengis:asWKT}}
-          </div>
-        </div>
-        {{/+opengis:asWKT}}
 
         {{#+rdf:seeAlso}}
           <div class="ui item">
@@ -621,16 +350,22 @@
               Images from wikimedia
             </h3>
             {{#rdf:seeAlso}}
-              <div class="fetch imagegrid" resource="{{{.}}}" 
-                  graph="https://query.wikidata.org/sparql?query=construct%7B%3C{{{.}}}%3E%20wdt%3AP94%20%3Fo%20.%0A%3C{{{.}}}%3E%20wdt%3AP18%20%3Foo%20.%0A%3C{{{.}}}%3E%20wdt%3AP242%20%3Fooo%20.%0A%7D%0Awhere%20%7B%0A%3C{{{.}}}%3E%20wdt%3AP94%20%3Fo%20.%0A%3C{{{.}}}%3E%20wdt%3AP18%20%3Foo%20.%0A%3C{{{.}}}%3E%20wdt%3AP242%20%3Fooo%20.%0A%7D" 
-                  context="http://rdf2h.github.io/2015/rdf2h#wikidata">
-              </div>
+              <div class="fetch scroll-x ui segment pseudo imagegrid" resource="{{{.}}}" graph="https://query.wikidata.org/sparql?query=construct%7B%3C{{{.}}}%3E%20wdt%3AP94%20%3Fo%20.%0A%3C{{{.}}}%3E%20wdt%3AP18%20%3Foo%20.%0A%3C{{{.}}}%3E%20wdt%3AP242%20%3Fooo%20.%0A%7D%0Awhere%20%7B%0A%3C{{{.}}}%3E%20wdt%3AP94%20%3Fo%20.%0A%3C{{{.}}}%3E%20wdt%3AP18%20%3Foo%20.%0A%3C{{{.}}}%3E%20wdt%3AP242%20%3Fooo%20.%0A%7D" context="http://rdf2h.github.io/2015/rdf2h#wikidata"></div>
             {{/rdf:seeAlso}}
           </div>
         {{/+rdf:seeAlso}}
       </div>
     """
 ] .
+
+[ a r2h:Renderer ;
+    r2h:type rdfs:Resource ;
+    r2h:context gt:Label ;
+    r2h:mustache """
+    {{@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>}}
+	  {{#rdfs:label}}{{^+rdfs:label}}{{.}}{{/+rdfs:label}}
+    """
+].
 
 [ a r2h:Renderer ;
     r2h:type rdfs:Resource ;
@@ -708,15 +443,15 @@
     r2h:type rdfs:Resource;
     r2h:context gt:Card;
     r2h:javaScript """
-      let content = '<tbody>';
-      let s = n.graph.match(n.node, undefined, undefined);
       console.log(n);
+      //<a class='fetch' resource='${t.predicate.value}' context='http://rdf2h.github.io/2016/generic-rdf2h-renderers/Label' href='${t.predicate.value}'></a>
+      let result = '';
+      let s = n.graph.match(n.node, undefined, undefined);
       if (s.length > 0) {
         s.forEach(function(t) {
-          content += `<tr><td><a href='${t.predicate.value}'>${t.predicate.value}</a></td><td>${t.object.value.replace(/&/g,'&amp;')}</td></tr>`;
+          result += `<tr><td><a href='${t.predicate.value}'>${t.predicate.value}</a></td><td>${t.object.value.replace(/&/g,'&amp;')}</td></tr>`;
         });
-      }
-      let result = `<thead><tr><th colspan='2'><a href=${n.value}>${n.value}</a></th></tr></thead>${content}</tbody>`;
+      };
       print(result);
     """
 ].
