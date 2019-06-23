@@ -4,10 +4,11 @@
 
 <>
   a doap:Project ;
-  doap:name "TLDS demo " ;
+  doap:name "TLDS demo" ;
   doap:shortdesc "A linked data explorer based on TLDS and data from geo.admin.ch." ;
-  doap:description "A linked data explorer based on TLDS (https://github.com/linked-solutions/tlds) based on geographical data from geo.admin.ch. Configured in turtle." ;
+  doap:description "A linked data explorer based on <a href='https://github.com/linked-solutions/tlds'>TLDS</a> based on geographical data from <a href='https://geo.admin.ch'>geo.admin.ch</a>. Configured in turtle.<br>Examples: <a href='/boundaries/municipality/261'>City of Zürich</a>,<a href='/boundaries/canton/2'>Canton of Bern</a>" ;
   doap:homepage <https://tlds-demo.factsmission.org> ;
+  # What is http://njh.me/Semantic_Web ? URL leads nowhere
   doap:category <http://njh.me/Semantic_Web> ;
   doap:programming-language "JAVA" ;
   doap:developer [

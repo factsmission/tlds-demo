@@ -1,4 +1,4 @@
-@base <https://tlds-demo.factsmission.org/renderers#>
+@base <https://tlds-demo.factsmission.org/renderers#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix gt: <http://rdf2h.github.io/2016/generic-rdf2h-renderers/> .
 @prefix r2h: <http://rdf2h.github.io/2015/rdf2h#> .
@@ -33,7 +33,8 @@
                 .imagegrid>a:last-child {padding-right:1rem;}
                 .imagegrid>a>img {height:300px;margin:auto;}
                 .item {flex-wrap:wrap;}
-                .scroll-x {overflow-x:auto;width:100%;}
+                .scroll-x {overflow-x:auto;overflow-y:hidden;width:100%;}
+                .scroll-x::-webkit-scrollbar-track {background:none}
                 .ui.segment.pseudo {padding:0;box-shadow:none;}
                 .ui.segment.pseudo:blank {display:none;}
                 .ui.segment.pseudo>table {border:none;}
@@ -42,6 +43,7 @@
                 document.body.classList.add('inv');
               </script>
               <link rel="stylesheet" id="semanticcss" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"/>
+              <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,700&display=swap" rel="stylesheet">
               <script>
               var e = document.getElementById("semanticcss");
               e.onload = function () {
@@ -51,6 +53,9 @@
               <!--<link rel='stylesheet' href='http://localhost:8080/style.css' />-->
               <title>{{.}}</title>
               <style>
+                * {
+                  font-family: 'Work Sans', 'Helvetica Neue', 'Arial', sans-serif;
+                }
               </style>
             </head>
             <body>
@@ -134,125 +139,6 @@
         <title>Resource: {{.}}</title>
     """.
 
-
-[ a r2h:Renderer;
-    r2h:type doap:Project ;
-    r2h:context r2h:Default ;
-    r2h:mustache """{{@prefix doap: <http://usefulinc.com/ns/doap#>}}
-    {{@prefix rdfs: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>}}
-    {{@prefix gt: <http://rdf2h.github.io/2016/generic-rdf2h-renderers/>}}
-
-    {{#+rdfs:type}}
-    <div class="two column row">
-      <div class="column four wide">
-        <p>Class:</p>
-      </div>
-      <div class="column">
-        {{#rdfs:type}}
-        <p><b><a href="{{{.}}}">{{{.}}}</a></b></p>
-        {{/rdfs:type}}
-      </div>
-    </div>
-    {{/+rdfs:type}}
-
-    {{#+doap:name}}
-    <div class="two column row">
-      <div class="column four wide">
-        <p>Name:</p>
-      </div>
-      <div class="column">
-        <p>{{doap:name}}</p>
-      </div>
-    </div>
-    {{/+doap:name}}
-
-    {{#+doap:shortdesc}}
-    <div class="two column row">
-      <div class="column four wide">
-        <p>Short Description:</p>
-      </div>
-      <div class="column">
-        <p>{{doap:shortdesc}}</p>
-      </div>
-    </div>
-    {{/+doap:shortdesc}}
-
-    {{#+doap:description}}
-    <div class="two column row">
-      <div class="column four wide">
-        <p>Description:</p>
-      </div>
-      <div class="column">
-        <p>{{doap:description}}</p>
-      </div>
-    </div>
-    {{/+doap:description}}
-
-    {{#+doap:homepage}}
-    <div class="two column row">
-      <div class="column four wide">
-        <p>Homepage:</p>
-      </div>
-      <div class="column">
-        {{#doap:homepage}}
-        <p><b><a href="{{{.}}}">{{{.}}}</a></b></p>
-        {{/doap:homepage}}
-      </div>
-    </div>
-    {{/+doap:homepage}}
-
-    {{#+doap:category}}
-    <div class="two column row">
-      <div class="column four wide">
-        <p>category:</p>
-      </div>
-      <div class="column">
-        {{#doap:category}}
-        <p><b><a href="{{{.}}}">{{{.}}}</a></b></p>
-        {{/doap:category}}
-      </div>
-    </div>
-    {{/+doap:category}}
-
-    {{#+doap:programming-language}}
-    <div class="two column row">
-      <div class="column four wide">
-        <p>Programming Language:</p>
-      </div>
-      <div class="column">
-        {{doap:programming-language}}
-      </div>
-    </div>
-    {{/+doap:programming-language}}
-
-    {{#+doap:developer}}
-    <div class="two column row">
-      <div class="column four wide">
-        <p>Developer:</p>
-      </div>
-      <div class="column">
-        {{#doap:developer}}
-          {{{:render . gt:Developer}}}
-        {{/doap:developer}}
-      </div>
-    </div>
-    {{/+doap:developer}}
-
-    {{#+doap:repository}}
-    <div class="two column row">
-      <div class="column four wide">
-        <p>Repository:</p>
-      </div>
-      <div class="column">
-        {{#doap:repository}}
-          {{{:render . gt:Repository}}}
-        {{/doap:repository}}
-      </div>
-    </div>
-    {{/+doap:repository}}
-    """
-].
-
 [ a r2h:Renderer ;
     r2h:type foaf:Organization ;
     r2h:context gt:Developer ;
@@ -281,6 +167,7 @@
       {{@prefix rdf: <http://www.w3.org/2000/01/rdf-schema#>}}
       {{@prefix dc: <http://purl.org/dc/terms/>}}
       {{@prefix s: <http://schema.org/>}}
+      {{@prefix doap: <http://usefulinc.com/ns/doap#>}}
       {{@prefix rdfs: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>}}
       {{@prefix opengis: <http://www.opengis.net/ont/geosparql#>}}
       {{@prefix gt: <http://rdf2h.github.io/2016/generic-rdf2h-renderers/>}}
@@ -297,7 +184,10 @@
         {{/+s:hasMap}}
 
         <div class="ui item">
-          <div class="content">  
+          <div class="content">
+            {{#+doap:name}}
+              <h1 class="ui header">{{doap:name}}</h1>
+            {{/+doap:name}}
             {{#+s:name}}
               <h1 class="ui header">{{s:name}}</h1>
             {{/+s:name}}
@@ -313,6 +203,9 @@
             {{#+ldgeo:bfsNumber}}
               <p class="ui sub header">{{{ldgeo:bfsNumber}}}</p>
             {{/+ldgeo:bfsNumber}}
+            {{#+doap:shortdesc}}
+              <br><p class="ui sub header">{{{doap:shortdesc}}}</p>
+            {{/+doap:shortdesc}}
           </div>
         </div>
 
@@ -323,11 +216,19 @@
                 context="http://rdf2h.github.io/2015/rdf2h#Abstract">
             </p>
           </div>
-        {{/rdf:seeAlso}} 
+        {{/rdf:seeAlso}}
+
+        {{#doap:description}}
+          <div class="ui item"> 
+            <p>
+              {{{.}}}
+            </p>
+          </div>
+        {{/doap:description}}
 
         <div class="item">
             <div class='scroll-x ui segment pseudo'>
-              <table class='ui celled table fetch' resource="{{{.}}}" context="http://rdf2h.github.io/2016/generic-rdf2h-renderers/Card"></table>
+              <table class='ui celled table'><thead><tr><th colspan='2'>Other Properties</th></tr></thead><tbody class='fetch' resource="{{{.}}}" context="http://rdf2h.github.io/2016/generic-rdf2h-renderers/Card"></tbody></table>
             </div>
         </div>
 
@@ -345,6 +246,16 @@
         {{/+dc:hasVersion}}
 
         {{#+rdf:seeAlso}}
+          <div class="ui item">
+            <h3 class="ui header">
+              Neighboring Entities
+            </h3>
+            {{#rdf:seeAlso}}
+              <div class='fetch' resource="{{{.}}}" context="http://rdf2h.github.io/2016/generic-rdf2h-renderers/Card"
+                graph='https://query.wikidata.org/sparql?query=construct%7B%0A%20%20%3C{{{.}}}%3E%20wdt%3AP47%20%3Fn.%0A%20%20%3Fn%20wdt%3AP771%20%3Fo.%0A%20%20%3Fn%20rdfs%3Alabel%20%3Foo.%0A%7D%0AWHERE%20%7B%0A%20%20%3C{{{.}}}%3E%20wdt%3AP47%20%3Fn.%0A%20%20OPTIONAL%20%7B%20%3Fn%20wdt%3AP771%20%3Fo.%20%7D%0A%20%20OPTIONAL%20%7B%0A%20%20%20%20%3Fn%20rdfs%3Alabel%20%3Foo.%0A%20%20%20%20FILTER%20%28lang%28%3Foo%29%20%3D%20"en"%29%0A%20%20%20%7D%0A%7D'>
+              </div>
+            {{/rdf:seeAlso}}
+          </div>
           <div class="ui item">
             <h3 class="ui header">
               Images from wikimedia
@@ -443,13 +354,62 @@
     r2h:type rdfs:Resource;
     r2h:context gt:Card;
     r2h:javaScript """
+      let special = [
+          'http://usefulinc.com/ns/doap#name',
+          'http://usefulinc.com/ns/doap#description',
+          'http://usefulinc.com/ns/doap#shortdesc',
+          'http://schema.org/name',
+          'http://schema.org/hasMap',
+          'http://schema.org/alternateName',
+          'http://www.geonames.org/ontology#countryCode',
+          'http://purl.org/dc/terms/identifier',
+          'http://purl.org/dc/terms/hasVersion',
+          'https://ld.geo.admin.ch/def/bfsNumber'
+        ]
+      let prefixMappings = [
+          {ns: "http://www.w3.org/1999/02/22-rdf-syntax-ns#", prefix: "rdf:"},
+          {ns: "http://www.w3.org/2004/02/skos/core#", prefix: "skos:"},
+          {ns: "http://www.w3.org/2002/07/owl#", prefix: "owl:"},
+          {ns: "http://www.w3.org/2000/01/rdf-schema#", prefix: "rdfs:"},
+          {ns: "http://schema.org/", prefix: "schema:"},
+          {ns: "https://gont.ch/", prefix: "gont:"},
+          {ns: "https://ld.geo.admin.ch/def/", prefix: "ch:"},
+          {ns: "http://www.opengis.net/ont/geosparql#", prefix: "geo:"},
+          {ns: "http://www.geonames.org/ontology#", prefix: "gn:"},
+          {ns: "http://dbpedia.org/resource/", prefix: "dbr:"},
+          {ns: "http://dbpedia.org/ontology/", prefix: "dbo:"},
+          {ns: "http://dbpedia.org/property/", prefix: "dbp:"},
+          {ns: "http://xmlns.com/foaf/0.1/", prefix: "foaf:"},
+          {ns: "http://www.wikidata.org/entity/", prefix: "wikidata:"},
+          {ns: "http://commons.wikimedia.org/wiki/", prefix: "wikimedia:"},
+          {ns: "http://purl.org/dc/terms/", prefix: "dc:"},
+          {ns: "http://usefulinc.com/ns/doap#", prefix: "doap:"},
+          {ns: window.location.origin + '/boundaries/municipality/geometry/', prefix: "Municipal geometry "},
+          {ns: window.location.origin + '/boundaries/municipality/', prefix: "Municipality "},
+          {ns: window.location.origin + '/boundaries/district/', prefix: "District "},
+          {ns: window.location.origin + '/boundaries/canton/', prefix: "Canton "},
+          {ns: window.location.origin + '/boundaries/country/', prefix: "Country "}
+        ];
+      function styleUri(uri) {
+          var mapping = prefixMappings.find(function(mappping) {
+            return uri.startsWith(mappping.ns);
+          });
+          if (mapping) return mapping.prefix+"<b>"+uri.substring(mapping.ns.length)+"</b>";
+          return uri;
+      }
       console.log(n);
       //<a class='fetch' resource='${t.predicate.value}' context='http://rdf2h.github.io/2016/generic-rdf2h-renderers/Label' href='${t.predicate.value}'></a>
       let result = '';
       let s = n.graph.match(n.node, undefined, undefined);
       if (s.length > 0) {
         s.forEach(function(t) {
-          result += `<tr><td><a href='${t.predicate.value}'>${t.predicate.value}</a></td><td>${t.object.value.replace(/&/g,'&amp;')}</td></tr>`;
+          console.log(t.object)
+          if (!special.includes(t.predicate.value)) {
+            let value = t.object.termType == 'NamedNode' ?
+              `<a href='${t.object.value}'>${styleUri(t.object.value)}</a>` :
+              t.object.value.replace(/&/g,'&amp;');
+            result += `<tr><td><a href='${t.predicate.value}'>${styleUri(t.predicate.value)}</a></td><td>${value}</td></tr>`;
+          }
         });
       };
       print(result);
