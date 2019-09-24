@@ -251,7 +251,7 @@
               Neighboring Entities
             </h3>
             {{#rdf:seeAlso}}
-              <div class='fetch' resource="{{{.}}}" context="http://rdf2h.github.io/2016/generic-rdf2h-renderers/Card"
+              <div class='fetch' resource="{{{.}}}" context="http://rdf2h.github.io/2016/generic-rdf2h-renderers/Neighbors"
                 graph='https://query.wikidata.org/sparql?query=construct%7B%0A%20%20%3C{{{.}}}%3E%20wdt%3AP47%20%3Fn.%0A%20%20%3Fn%20wdt%3AP771%20%3Fo.%0A%20%20%3Fn%20rdfs%3Alabel%20%3Foo.%0A%7D%0AWHERE%20%7B%0A%20%20%3C{{{.}}}%3E%20wdt%3AP47%20%3Fn.%0A%20%20OPTIONAL%20%7B%20%3Fn%20wdt%3AP771%20%3Fo.%20%7D%0A%20%20OPTIONAL%20%7B%0A%20%20%20%20%3Fn%20rdfs%3Alabel%20%3Foo.%0A%20%20%20%20FILTER%20%28lang%28%3Foo%29%20%3D%20"en"%29%0A%20%20%20%7D%0A%7D'>
               </div>
             {{/rdf:seeAlso}}
@@ -323,7 +323,6 @@
     """
 ].
 
-
 [ a r2h:Renderer ;
     r2h:type <http://www.openlinksw.com/schemas/virtrdf#Geometry> ;
     r2h:context gt:WKT ;
@@ -347,6 +346,55 @@
     <p><b>Operating Point Type:</b>{{#geotra:operatingPointType}}{{{:render . gt:Link}}}{{/geotra:operatingPointType}}</p>
     <p><b>Contained in Place: </b>{{#s:containedInPlace}}{{{:render . gt:Link}}}{{/s:containedInPlace}}</p>
 
+    """
+].
+
+[ a r2h:Renderer ;
+    r2h:type rdfs:Resource;
+    r2h:context gt:Neighbors;
+    r2h:javaScript """
+    let prefixMappings = [
+          {ns: "http://www.w3.org/1999/02/22-rdf-syntax-ns#", prefix: "rdf:"},
+          {ns: "http://www.w3.org/2004/02/skos/core#", prefix: "skos:"},
+          {ns: "http://www.w3.org/2002/07/owl#", prefix: "owl:"},
+          {ns: "http://www.w3.org/2000/01/rdf-schema#", prefix: "rdfs:"},
+          {ns: "http://schema.org/", prefix: "schema:"},
+          {ns: "https://gont.ch/", prefix: "gont:"},
+          {ns: "https://ld.geo.admin.ch/def/", prefix: "ch:"},
+          {ns: "http://www.opengis.net/ont/geosparql#", prefix: "geo:"},
+          {ns: "http://www.geonames.org/ontology#", prefix: "gn:"},
+          {ns: "http://dbpedia.org/resource/", prefix: "dbr:"},
+          {ns: "http://dbpedia.org/ontology/", prefix: "dbo:"},
+          {ns: "http://dbpedia.org/property/", prefix: "dbp:"},
+          {ns: "http://xmlns.com/foaf/0.1/", prefix: "foaf:"},
+          {ns: "http://www.wikidata.org/entity/", prefix: "wikidata:"},
+          {ns: "http://commons.wikimedia.org/wiki/", prefix: "wikimedia:"},
+          {ns: "http://purl.org/dc/terms/", prefix: "dc:"},
+          {ns: "http://usefulinc.com/ns/doap#", prefix: "doap:"},
+          {ns: window.location.origin + '/boundaries/municipality/geometry/', prefix: "Municipal geometry "},
+          {ns: window.location.origin + '/boundaries/municipality/', prefix: "Municipality "},
+          {ns: window.location.origin + '/boundaries/district/', prefix: "District "},
+          {ns: window.location.origin + '/boundaries/canton/', prefix: "Canton "},
+          {ns: window.location.origin + '/boundaries/country/', prefix: "Country "}
+        ];
+      function styleUri(uri) {
+          var mapping = prefixMappings.find(function(mappping) {
+            return uri.startsWith(mappping.ns);
+          });
+          if (mapping) return mapping.prefix+"<b>"+uri.substring(mapping.ns.length)+"</b>";
+          return uri;
+      }
+      let result = '';
+      let neighbors = n.out($rdf.namedNode('http://www.wikidata.org/prop/direct/P47'));
+      neighbors.each(neighbor => {
+        let muniCode = neighbor.out($rdf.namedNode('http://www.wikidata.org/prop/direct/P771'));
+        let label = neighbor.out($rdf.namedNode('http://www.w3.org/2000/01/rdf-schema#label'));
+        console.log(muniCode.value);
+        console.log(label.value);
+        result += `<tr><td><a href='/boundaries/municipality/${parseInt(muniCode.value)}'>${label.value}</a></td></tr>`;
+      });
+      console.log(result);
+      print(result);
     """
 ].
 
@@ -397,13 +445,12 @@
           if (mapping) return mapping.prefix+"<b>"+uri.substring(mapping.ns.length)+"</b>";
           return uri;
       }
-      console.log(n);
       //<a class='fetch' resource='${t.predicate.value}' context='http://rdf2h.github.io/2016/generic-rdf2h-renderers/Label' href='${t.predicate.value}'></a>
       let result = '';
       let s = n.graph.match(n.node, undefined, undefined);
       if (s.length > 0) {
         s.forEach(function(t) {
-          console.log(t.object)
+          //console.log(t.object)
           if (!special.includes(t.predicate.value)) {
             let value = t.object.termType == 'NamedNode' ?
               `<a href='${t.object.value}'>${styleUri(t.object.value)}</a>` :
