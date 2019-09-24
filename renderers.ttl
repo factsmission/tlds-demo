@@ -81,22 +81,24 @@
                 </div>
                 <footer class="ui inverted vertical dividing footer segment form-page padded">
                   <div class="ui hidden divider"></div>
-                  <div class="ui grid container">
-                    <div class="ui eleven wide column">
-                      <div class="ui container">
-                        This project is a <a href="https://github.com/linked-solutions/tlds">TLDS</a> demo based on the data from <a href="https://www.geo.admin.ch">geo.admin.ch</a> by <a href="https://factsmission.com">FactsMission</a>.
+                  <div class="ui container">
+                    <div class="ui stackable grid container">
+                      <div class="ui twelve wide column">
+                        <div class="ui container">
+                          This project is a <a href="https://github.com/linked-solutions/tlds">TLDS</a> demo based on the data from <a href="https://www.geo.admin.ch">geo.admin.ch</a> by <a href="https://factsmission.com">FactsMission</a>.
+                        </div>
+                        <div class="ui hidden divider"></div>
+                        <div class="ui aligned container">
+                          Check the source-code on <a href="https://github.com/factsmission/tlds-demo" style="color: white;"><i class="large github icon"></i></a>
+                          <div class="ui divider"></div>
+                        </div>
+                        <div class="ui container">
+                          <small>Logo by <a href="https://en.wikipedia.org/wiki/File:Flag-map_of_Switzerland.svg">Wikimedia Commons</a> under <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.en">Creative Commons Attribution-Share Alike 3.0 Unported</a> license.</small>
+                        </div>
                       </div>
-                      <div class="ui hidden divider"></div>
-                      <div class="ui aligned container">
-                        Check the source-code on <a href="https://github.com/factsmission/tlds-demo" style="color: white;"><i class="large github icon"></i></a>
-                        <div class="ui divider"></div>
+                      <div class="ui four wide column">
+                        <a href="https://factsmission.com/"><img style="max-height:80px;max-width:100%" src="https://factsmission.com/img/logo.svg"></a>
                       </div>
-                      <div class="ui container">
-                        <small>Logo by <a href="https://en.wikipedia.org/wiki/File:Flag-map_of_Switzerland.svg">Wikimedia Commons</a> under <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.en">Creative Commons Attribution-Share Alike 3.0 Unported</a> license.</small>
-                      </div>
-                    </div>
-                    <div class="ui one wide column">
-                      <a href="https://factsmission.com/"><img style="max-height:80px" src="https://factsmission.com/img/logo.svg"></a>
                     </div>
                   </div>
                   <div class="ui hidden divider"></div>
