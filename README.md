@@ -14,7 +14,7 @@ Using our pre-built images:
 
     docker run -p 5000:5000 --name tlds-demo factsmission/tlds-demo swissgeo-config-localhost.ttl
 
-Acces for example: http://localhost:5000/boundaries/municipality/261:2016
+Access for example: http://localhost:5000/boundaries/municipality/261:2016
 
 To build it yourself, for example after making changes to the renderers, execute: 
 
