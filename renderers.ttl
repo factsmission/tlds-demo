@@ -26,21 +26,6 @@
         {{{@prefix s: <http://schema.org/>}}}
         {{{@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>}}}
             <head>
-              <style>
-                .inv {display: none !important;}
-                .imagegrid {display:flex;flex-wrap:nowrap;}
-                .imagegrid>a {display:block;flex:1;margin:1rem 0 1rem 1rem}
-                .imagegrid>a:last-child {padding-right:1rem;}
-                .imagegrid>a>img {height:300px;margin:auto;}
-                .item {flex-wrap:wrap;}
-                .scroll-x {overflow-x:auto;overflow-y:hidden;width:100%;}
-                .scroll-x::-webkit-scrollbar-track {background:none}
-                .ui.segment.pseudo {padding:0;box-shadow:none;}
-                .ui.segment.pseudo:blank {display:none;}
-                .ui.segment.pseudo>table {border:none;}
-                a {color:inherit;box-shadow: inset 0px -3px #BBDEFB;transition: .2s ease-in box-shadow;}
-                a:hover {color:inherit;box-shadow: inset 0px -6px #64B5F6;}
-              </style>
               <script>
                 document.body.classList.add('inv');
               </script>
@@ -59,6 +44,21 @@
                 * {
                   font-family: 'Work Sans', 'Helvetica Neue', 'Arial', sans-serif;
                 }
+                .inv {display: none !important;}
+                .imagegrid {display:flex;flex-wrap:nowrap;}
+                .imagegrid>a {display:block;flex:1;margin:1rem 0 1rem 1rem}
+                .imagegrid>a:last-child {padding-right:1rem;}
+                .imagegrid>a>img {height:300px;margin:auto;}
+                .item {flex-wrap:wrap;}
+                .scroll-x {overflow-x:auto;overflow-y:hidden;width:100%;}
+                .scroll-x::-webkit-scrollbar-track {background:none}
+                .ui.segment.pseudo {padding:0;box-shadow:none;}
+                .ui.segment.pseudo:blank {display:none;}
+                .ui.segment.pseudo>table {border:none;}
+                a:not(.no_decor) {color:inherit;box-shadow: inset 0px -3px #BBDEFB;transition: .2s ease-in box-shadow;}
+                a:not(.no_decor):hover {color:inherit;box-shadow: inset 0px -6px #64B5F6;}
+                a.no_decor {color:#BBDEFB;}
+                @media only screen and (max-width: 767px){.ui.table:not(.unstackable) tr>td, .ui.table:not(.unstackable) tr>th {line-height:2em;}}
               </style>
             </head>
             <body>
@@ -66,7 +66,7 @@
                 <header class="ui container">
                   <div class="ui hidden divider"></div>
                   <div class="ui two column stackable grid">
-                    <div class="four wide center aligned column"><img class="ui middle aligned image" src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Flag-map_of_Switzerland.svg" onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/3/3b/Flag-map_of_Switzerland.svg'" style=" height: auto; max-width: 400px; max-height: 120px;"></div>
+                    <div class="four wide center aligned column"><img class="ui middle aligned image" src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Flag-map_of_Switzerland.svg" onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/3/3b/Flag-map_of_Switzerland.svg'" style=" height: auto; max-width: 400px; max-height: 120px;" aria-hidden='true' alt='Flag-map of Switzerland'></div>
 
                     <div class="ten wide column">
                       <h1>Linked Data App on Swiss Municipalities</h1>
@@ -88,19 +88,19 @@
                     <div class="ui stackable grid container">
                       <div class="ui twelve wide column">
                         <div class="ui container">
-                          This project is a <a href="https://github.com/linked-solutions/tlds">TLDS</a> demo based on the data from <a href="https://www.geo.admin.ch">geo.admin.ch</a> by <a href="https://factsmission.com">FactsMission</a>.
+                          This project is a <a class='no_decor' href="https://github.com/linked-solutions/tlds">TLDS</a> demo based on the data from <a class='no_decor' href="https://www.geo.admin.ch">geo.admin.ch</a> by <a class='no_decor' href="https://factsmission.com">FactsMission</a>.
                         </div>
                         <div class="ui hidden divider"></div>
                         <div class="ui aligned container">
-                          Check the source-code on <a href="https://github.com/factsmission/tlds-demo" style="color: white;"><i class="large github icon"></i></a>
+                          Check the source-code on <a class='no_decor' aria-label='Github: Repository' href="https://github.com/factsmission/tlds-demo" style="color: white;"><i class="large github icon"></i></a>
                           <div class="ui divider"></div>
                         </div>
                         <div class="ui container">
-                          <small>Logo by <a href="https://en.wikipedia.org/wiki/File:Flag-map_of_Switzerland.svg">Wikimedia Commons</a> under <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.en">Creative Commons Attribution-Share Alike 3.0 Unported</a> license.</small>
+                          <small>Logo by <a class='no_decor' href="https://en.wikipedia.org/wiki/File:Flag-map_of_Switzerland.svg">Wikimedia Commons</a> under <a class='no_decor' href="https://creativecommons.org/licenses/by-sa/3.0/deed.en">Creative Commons Attribution-Share Alike 3.0 Unported</a> license.</small>
                         </div>
                       </div>
                       <div class="ui four wide column">
-                        <a href="https://factsmission.com/"><img style="max-height:80px;max-width:100%" src="https://factsmission.com/img/logo.svg"></a>
+                        <a class='no_decor' aria-hidden='true' href="https://factsmission.com/"><img style="max-height:80px;max-width:100%" src="https://factsmission.com/img/logo.svg"></a>
                       </div>
                     </div>
                   </div>
@@ -112,7 +112,7 @@
                   {
                     "@context": "http://schema.org",
                     "@type": "WebSite",
-                    "url": "https://localhost:5000",
+                    "url": "https://tlds-demo.factsmission.org",
                     "name": "ld.geo.admin.ch",
                     "creator": {
                       "@type": "Organization",
@@ -293,13 +293,13 @@
     r2h:context r2h:wikidata ;
     r2h:mustache """{{@prefix wdt: <http://www.wikidata.org/prop/direct/>}}
     {{#wdt:P94}}
-	  <a href="{{.}}"><img src="{{.}}" alt="Coat Of Arm"></a>
+    <a class='no_decor' href="{{.}}"><img src="{{.}}" alt="Coat Of Arm"></a>
     {{/wdt:P94}}
     {{#wdt:P18}}
-	  <a href="{{.}}"><img src="{{.}}" alt="image"></a>
+    <a class='no_decor' href="{{.}}"><img src="{{.}}" alt="image"></a>
     {{/wdt:P18}}
     {{#wdt:P242}}
-	  <a href="{{.}}"><img src="{{.}}" alt="map"></a>
+    <a class='no_decor' href="{{.}}"><img src="{{.}}" alt="map"></a>
     {{/wdt:P242}}
     """
 ].
@@ -481,7 +481,7 @@
     r2h:javaScript """
     let s = suffix => $rdf.sym("http://schema.org/"+suffix);
     let map = n.out(s("hasMap")).value.replace('https://map.geo.admin.ch/', 'https://map.geo.admin.ch/embed.html');
-    let iframe = `<iframe src='${map}' height='400' frameborder='0' style='width:100%;border:0'></iframe>`
+    let iframe = `<iframe src='${map}' height='400' frameborder='0' style='width:100%;border:0' title='Embedded map'></iframe>`
     print(iframe);
     """
 ].
