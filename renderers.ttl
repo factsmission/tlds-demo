@@ -238,22 +238,22 @@
 
         {{#+rdf:seeAlso}}
           <div class="ui item">
-            <h3 class="ui header">
-              Neighboring Entities
-            </h3>
-            {{#rdf:seeAlso}}
-              <div class='fetch' resource="{{{.}}}" context="http://rdf2h.github.io/2016/generic-rdf2h-renderers/Neighbors"
-                graph='https://query.wikidata.org/sparql?query=construct%7B%0A%20%20%3C{{{.}}}%3E%20wdt%3AP47%20%3Fn.%0A%20%20%3Fn%20wdt%3AP771%20%3Fo.%0A%20%20%3Fn%20rdfs%3Alabel%20%3Foo.%0A%7D%0AWHERE%20%7B%0A%20%20%3C{{{.}}}%3E%20wdt%3AP47%20%3Fn.%0A%20%20OPTIONAL%20%7B%20%3Fn%20wdt%3AP771%20%3Fo.%20%7D%0A%20%20OPTIONAL%20%7B%0A%20%20%20%20%3Fn%20rdfs%3Alabel%20%3Foo.%0A%20%20%20%20FILTER%20%28lang%28%3Foo%29%20%3D%20"en"%29%0A%20%20%20%7D%0A%7D'>
-              </div>
-            {{/rdf:seeAlso}}
-          </div>
-          <div class="ui item">
-            <h3 class="ui header">
-              Images from wikimedia
-            </h3>
-            {{#rdf:seeAlso}}
-              <div class="fetch scroll-x ui segment pseudo imagegrid" resource="{{{.}}}" graph="https://query.wikidata.org/sparql?query=construct%7B%3C{{{.}}}%3E%20wdt%3AP94%20%3Fo%20.%0A%3C{{{.}}}%3E%20wdt%3AP18%20%3Foo%20.%0A%3C{{{.}}}%3E%20wdt%3AP242%20%3Fooo%20.%0A%7D%0Awhere%20%7B%0A%3C{{{.}}}%3E%20wdt%3AP94%20%3Fo%20.%0A%3C{{{.}}}%3E%20wdt%3AP18%20%3Foo%20.%0A%3C{{{.}}}%3E%20wdt%3AP242%20%3Fooo%20.%0A%7D" context="http://rdf2h.github.io/2015/rdf2h#wikidata"></div>
-            {{/rdf:seeAlso}}
+            <table class='ui celled table'>
+              <thead><tr><th colspan='2'>Neighboring Entities</th></tr></thead>
+              {{#rdf:seeAlso}}
+                <tbody class='fetch' resource="{{{.}}}" context="http://rdf2h.github.io/2016/generic-rdf2h-renderers/Neighbors"
+                  graph='https://query.wikidata.org/sparql?query=construct%7B%0A%20%20%3C{{{.}}}%3E%20wdt%3AP47%20%3Fn.%0A%20%20%3Fn%20wdt%3AP771%20%3Fo.%0A%20%20%3Fn%20rdfs%3Alabel%20%3Foo.%0A%7D%0AWHERE%20%7B%0A%20%20%3C{{{.}}}%3E%20wdt%3AP47%20%3Fn.%0A%20%20OPTIONAL%20%7B%20%3Fn%20wdt%3AP771%20%3Fo.%20%7D%0A%20%20OPTIONAL%20%7B%0A%20%20%20%20%3Fn%20rdfs%3Alabel%20%3Foo.%0A%20%20%20%20FILTER%20%28lang%28%3Foo%29%20%3D%20"en"%29%0A%20%20%20%7D%0A%7D'>
+                </tbody>
+              {{/rdf:seeAlso}}
+            </table>
+            </div>
+            <div class="ui item">
+              <h3 class="ui header">
+                Images from wikimedia
+              </h3>
+              {{#rdf:seeAlso}}
+                <div class="fetch scroll-x ui segment pseudo imagegrid" resource="{{{.}}}" graph="https://query.wikidata.org/sparql?query=construct%7B%3C{{{.}}}%3E%20wdt%3AP94%20%3Fo%20.%0A%3C{{{.}}}%3E%20wdt%3AP18%20%3Foo%20.%0A%3C{{{.}}}%3E%20wdt%3AP242%20%3Fooo%20.%0A%7D%0Awhere%20%7B%0A%3C{{{.}}}%3E%20wdt%3AP94%20%3Fo%20.%0A%3C{{{.}}}%3E%20wdt%3AP18%20%3Foo%20.%0A%3C{{{.}}}%3E%20wdt%3AP242%20%3Fooo%20.%0A%7D" context="http://rdf2h.github.io/2015/rdf2h#wikidata"></div>
+              {{/rdf:seeAlso}}
           </div>
         {{/+rdf:seeAlso}}
       </div>
