@@ -38,10 +38,13 @@
                 .ui.segment.pseudo {padding:0;box-shadow:none;}
                 .ui.segment.pseudo:blank {display:none;}
                 .ui.segment.pseudo>table {border:none;}
+                a {color:inherit;box-shadow: inset 0px -3px #BBDEFB;transition: .2s ease-in box-shadow;}
+                a:hover {color:inherit;box-shadow: inset 0px -6px #64B5F6;}
               </style>
               <script>
                 document.body.classList.add('inv');
               </script>
+              <meta name="viewport" content="width=device-width, initial-scale=1">
               <link rel="stylesheet" id="semanticcss" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"/>
               <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,700&display=swap" rel="stylesheet">
               <script>
