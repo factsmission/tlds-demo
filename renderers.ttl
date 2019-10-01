@@ -17,7 +17,7 @@
     r2h:type s:provider ;
     r2h:type gtfs:Stop ;
     r2h:type opengis:Geometry ;
-    rdfs:comment "Renders a full page, delegating to renderers in the default \n    context for the body, and to gt:HtmlHead for things like the html title" ;
+    rdfs:comment "Renders a full page, delegating to renderers in the default context for the main content" ;
     r2h:context gt:FullPage ;
     r2h:mustache
         """
@@ -126,20 +126,6 @@
 <http://rdf2h.github.io/2015/rdf2h#type>
         <http://www.w3.org/2000/01/rdf-schema#Resource>
 ] .
-
-<genericHead> a r2h:Renderer;
-    r2h:type rdfs:Resource;
-    r2h:context gt:HtmlHead;
-    r2h:mustache """
-        {{{:render . gt:HtmlTitle}}}
-    """.
-
-<genericHtmlTitle> a r2h:Renderer;
-    r2h:type rdfs:Resource;
-    r2h:context gt:HtmlTitle;
-    r2h:mustache """
-        <title>Resource: {{.}}</title>
-    """.
 
 [ a r2h:Renderer ;
     r2h:type foaf:Organization ;
