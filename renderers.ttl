@@ -219,7 +219,7 @@
 
         <div class="item">
             <div class='scroll-x ui segment pseudo'>
-              <table class='ui celled table'><thead><tr><th colspan='2'>Other Properties</th></tr></thead><tbody>{{:render . gt:Card}}</tbody></table>
+              <table class='ui celled table'><thead><tr><th colspan='2'>Other Properties</th></tr></thead><tbody>{{{:render . gt:Card}}}</tbody></table>
             </div>
         </div>
 
