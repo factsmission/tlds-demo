@@ -30,6 +30,12 @@
                 document.body.classList.add('inv');
               </script>
               <meta name="viewport" content="width=device-width, initial-scale=1">
+              {{#+doap:description}}
+                <meta name='Description' content='{{doap:description}}'>
+              {{/+doap:description}}
+              {{^+doap:description}}
+                <meta name='Description' content='Linked Data Resource {{.}}{{#+s:name}} ({{s:name}}){{/+s:name}}. Rendered with LD2h.'>
+              {{/+doap:description}}
               <link rel="stylesheet" id="semanticcss" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"/>
               <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,700&display=swap" rel="stylesheet">
               <script>
@@ -37,6 +43,7 @@
               e.onload = function () {
                 document.body.classList.remove('inv');
               };
+              document.documentElement.setAttribute('lang','en');
               </script>
               <title>{{.}}</title>
               <style>
