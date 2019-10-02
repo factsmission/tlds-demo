@@ -38,7 +38,6 @@
                 document.body.classList.remove('inv');
               };
               </script>
-              <!--<link rel='stylesheet' href='http://localhost:8080/style.css' />-->
               <title>{{.}}</title>
               <style>
                 * {
@@ -344,37 +343,6 @@
     r2h:type rdfs:Resource;
     r2h:context gt:Neighbors;
     r2h:javaScript """
-    let prefixMappings = [
-          {ns: "http://www.w3.org/1999/02/22-rdf-syntax-ns#", prefix: "rdf:"},
-          {ns: "http://www.w3.org/2004/02/skos/core#", prefix: "skos:"},
-          {ns: "http://www.w3.org/2002/07/owl#", prefix: "owl:"},
-          {ns: "http://www.w3.org/2000/01/rdf-schema#", prefix: "rdfs:"},
-          {ns: "http://schema.org/", prefix: "schema:"},
-          {ns: "https://gont.ch/", prefix: "gont:"},
-          {ns: "https://ld.geo.admin.ch/def/", prefix: "ch:"},
-          {ns: "http://www.opengis.net/ont/geosparql#", prefix: "geo:"},
-          {ns: "http://www.geonames.org/ontology#", prefix: "gn:"},
-          {ns: "http://dbpedia.org/resource/", prefix: "dbr:"},
-          {ns: "http://dbpedia.org/ontology/", prefix: "dbo:"},
-          {ns: "http://dbpedia.org/property/", prefix: "dbp:"},
-          {ns: "http://xmlns.com/foaf/0.1/", prefix: "foaf:"},
-          {ns: "http://www.wikidata.org/entity/", prefix: "wikidata:"},
-          {ns: "http://commons.wikimedia.org/wiki/", prefix: "wikimedia:"},
-          {ns: "http://purl.org/dc/terms/", prefix: "dc:"},
-          {ns: "http://usefulinc.com/ns/doap#", prefix: "doap:"},
-          {ns: window.location.origin + '/boundaries/municipality/geometry/', prefix: "Municipal geometry "},
-          {ns: window.location.origin + '/boundaries/municipality/', prefix: "Municipality "},
-          {ns: window.location.origin + '/boundaries/district/', prefix: "District "},
-          {ns: window.location.origin + '/boundaries/canton/', prefix: "Canton "},
-          {ns: window.location.origin + '/boundaries/country/', prefix: "Country "}
-        ];
-      function styleUri(uri) {
-          var mapping = prefixMappings.find(function(mappping) {
-            return uri.startsWith(mappping.ns);
-          });
-          if (mapping) return mapping.prefix+"<b>"+uri.substring(mapping.ns.length)+"</b>";
-          return uri;
-      }
       let result = '';
       let neighbors = n.out($rdf.namedNode('http://www.wikidata.org/prop/direct/P47'));
       neighbors.each(neighbor => {
