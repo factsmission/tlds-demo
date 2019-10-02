@@ -219,7 +219,7 @@
 
         <div class="item">
             <div class='scroll-x ui segment pseudo'>
-              <table class='ui celled table'><thead><tr><th colspan='2'>Other Properties</th></tr></thead><tbody class='fetch' resource="{{{.}}}" context="http://rdf2h.github.io/2016/generic-rdf2h-renderers/Card"></tbody></table>
+              <table class='ui celled table'><thead><tr><th colspan='2'>Other Properties</th></tr></thead><tbody>{{:render . gt:Card}}</tbody></table>
             </div>
         </div>
 
