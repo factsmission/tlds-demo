@@ -20,7 +20,7 @@ We realize that we as the creators of TLDS are biased and despite our best inten
 | Browsable Graph<sup>[2](#f2)</sup> | no | yes 🏅 |
 | Wikipedia Descriptions | no | yes 🏅 |
 | Wikimedia images | no | yes 🏅 |
-| Neighborring Municipalities from Wikidata | no | yes 🏅 |
+| Neighboring Municipalities from Wikidata | no | yes 🏅 |
 | Expanding versions of entities | no | yes 🏅 |
 | <b>Supported Formats</b> (Content Negotiation) |
 | application/rdf+xml | no (404) | yes 🏅 |
