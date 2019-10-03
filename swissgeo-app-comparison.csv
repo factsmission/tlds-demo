@@ -1,0 +1,23 @@
+,ld.geo,tlds-demo
+,Trifid,TLDS
+,,
+Performance (according to web.dev),85,58
+Accessibility (according to web.dev),92,100
+Best Practices (according to web.dev),77,100
+SEO (according to web.dev),82,100
+"Browsable Graph 
+(as per https://www.w3.org/DesignIssues/LinkedData.html)",no,yes
+Wikipedia Descriptions,no,yes
+Wikimedia images,no,yes
+Neighborring Municipalities from Wikidata,no,yes
+Expanding versions of entities,no,yes
+application/rdf+xml,no (404),yes
+text/turtle,yes,yes
+application/n-triples,no (404),yes
+application/ld+json,no (404),no (500)
+text/html,yes,yes
+,,
+,,
+,,
+,,
+https://ld.geo.admin.ch/boundaries/canton/2:2019,,

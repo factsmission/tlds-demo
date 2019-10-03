@@ -4,6 +4,8 @@ The following compares [TLDS](https://github.com/linked-solutions/tlds) with [Tr
 
 The chart only takes into account features visible to the client disregarding wether they are features of the (demo) app or of the underlying software. The reason for this is that we believe that concrete exempflifications of features like Wikimedia integration are more self-explanatory than the abstract features of the underlying software (e.g. documented templating mechanism, inclusion of external SPARQL Endpoint).
 
+We realize that we as the creators of TLDS are biased and despite our best intent to create a fair comparison based on objective criteria there might be some features we didn't account for. We welcome pull-requests with additions and corrections, the critical reader is also encouraged to have a look at pull-requests that have been submitted but that might not (yet) have been incorporated.
+
 | | ld.geo.admin.ch | tlds-demo.factsmission.org |
 | - | - | - |
 | Software | [Trifid](https://github.com/zazuko/trifid) | [TLDS](https://github.com/linked-solutions/tlds) |
