@@ -22,7 +22,7 @@ The chart only takes into account features visible to the client disregarding we
 | Expanding versions of entities | no | yes 🏅 |
 | <b>Supported Formats</b> (Content Negotiation) |
 | application/rdf+xml | no (404) | yes 🏅 |
-| text/turtle | yes | yes 🏅 |
+| text/turtle | yes | yes  |
 | application/n-triples | no (404) | yes 🏅 |
 | application/ld+json | no (404) | no (500) |
 | text/html | yes | yes |
