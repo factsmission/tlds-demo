@@ -2,7 +2,7 @@
 
 The purpose of this project is to demostrate the use of [TLDS](https://github.com/linked-solutions/tlds).
 
-For this demonstration we're using the SPARQL endpoint at https://ld.geo.admin.ch/query/.
+For this demonstration we're using the SPARQL endpoint at https://ld.geo.admin.ch/query/. The demo is online at https://tlds-demo.factsmission.org/.
 
 ## Usage
 
