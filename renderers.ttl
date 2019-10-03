@@ -17,7 +17,7 @@
     r2h:type s:provider ;
     r2h:type gtfs:Stop ;
     r2h:type opengis:Geometry ;
-    rdfs:comment "Renders a full page, delegating to renderers in the default \n    context for the body, and to gt:HtmlHead for things like the html title" ;
+    rdfs:comment "Renders a full page, delegating to renderers in the default context for the main content" ;
     r2h:context gt:FullPage ;
     r2h:mustache
         """
@@ -26,7 +26,30 @@
         {{{@prefix s: <http://schema.org/>}}}
         {{{@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>}}}
             <head>
+              <script>
+                document.body.classList.add('inv');
+              </script>
+              <meta name="viewport" content="width=device-width, initial-scale=1">
+              {{#+doap:description}}
+                <meta name='Description' content='{{doap:description}}'>
+              {{/+doap:description}}
+              {{^+doap:description}}
+                <meta name='Description' content='Linked Data Resource {{.}}{{#+s:name}} ({{s:name}}){{/+s:name}}. Rendered with LD2h.'>
+              {{/+doap:description}}
+              <link rel="stylesheet" id="semanticcss" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"/>
+              <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,700&display=swap" rel="stylesheet">
+              <script>
+              var e = document.getElementById("semanticcss");
+              e.onload = function () {
+                document.body.classList.remove('inv');
+              };
+              document.documentElement.setAttribute('lang','en');
+              </script>
+              <title>{{.}}</title>
               <style>
+                * {
+                  font-family: 'Work Sans', 'Helvetica Neue', 'Arial', sans-serif;
+                }
                 .inv {display: none !important;}
                 .imagegrid {display:flex;flex-wrap:nowrap;}
                 .imagegrid>a {display:block;flex:1;margin:1rem 0 1rem 1rem}
@@ -38,24 +61,10 @@
                 .ui.segment.pseudo {padding:0;box-shadow:none;}
                 .ui.segment.pseudo:blank {display:none;}
                 .ui.segment.pseudo>table {border:none;}
-              </style>
-              <script>
-                document.body.classList.add('inv');
-              </script>
-              <link rel="stylesheet" id="semanticcss" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"/>
-              <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,700&display=swap" rel="stylesheet">
-              <script>
-              var e = document.getElementById("semanticcss");
-              e.onload = function () {
-                document.body.classList.remove('inv');
-              };
-              </script>
-              <!--<link rel='stylesheet' href='http://localhost:8080/style.css' />-->
-              <title>{{.}}</title>
-              <style>
-                * {
-                  font-family: 'Work Sans', 'Helvetica Neue', 'Arial', sans-serif;
-                }
+                a:not(.no_decor) {color:inherit;box-shadow: inset 0px -3px #BBDEFB;transition: .2s ease-in box-shadow;}
+                a:not(.no_decor):hover {color:inherit;box-shadow: inset 0px -6px #64B5F6;}
+                a.no_decor {color:#BBDEFB;}
+                @media only screen and (max-width: 767px){.ui.table:not(.unstackable) tr>td, .ui.table:not(.unstackable) tr>th {line-height:2em;}}
               </style>
             </head>
             <body>
@@ -63,7 +72,7 @@
                 <header class="ui container">
                   <div class="ui hidden divider"></div>
                   <div class="ui two column stackable grid">
-                    <div class="four wide center aligned column"><img class="ui middle aligned image" src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Flag-map_of_Switzerland.svg" onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/3/3b/Flag-map_of_Switzerland.svg'" style=" height: auto; max-width: 400px; max-height: 120px;"></div>
+                    <div class="four wide center aligned column"><img class="ui middle aligned image" src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Flag-map_of_Switzerland.svg" onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/3/3b/Flag-map_of_Switzerland.svg'" style=" height: auto; max-width: 400px; max-height: 120px;" aria-hidden='true' alt='Flag-map of Switzerland'></div>
 
                     <div class="ten wide column">
                       <h1>Linked Data App on Swiss Municipalities</h1>
@@ -85,19 +94,19 @@
                     <div class="ui stackable grid container">
                       <div class="ui twelve wide column">
                         <div class="ui container">
-                          This project is a <a href="https://github.com/linked-solutions/tlds">TLDS</a> demo based on the data from <a href="https://www.geo.admin.ch">geo.admin.ch</a> by <a href="https://factsmission.com">FactsMission</a>.
+                          This project is a <a class='no_decor' href="https://github.com/linked-solutions/tlds">TLDS</a> demo based on the data from <a class='no_decor' href="https://www.geo.admin.ch">geo.admin.ch</a> by <a class='no_decor' href="https://factsmission.com">FactsMission</a>.
                         </div>
                         <div class="ui hidden divider"></div>
                         <div class="ui aligned container">
-                          Check the source-code on <a href="https://github.com/factsmission/tlds-demo" style="color: white;"><i class="large github icon"></i></a>
+                          Check the source-code on <a class='no_decor' aria-label='Github: Repository' href="https://github.com/factsmission/tlds-demo" style="color: white;"><i class="large github icon"></i></a>
                           <div class="ui divider"></div>
                         </div>
                         <div class="ui container">
-                          <small>Logo by <a href="https://en.wikipedia.org/wiki/File:Flag-map_of_Switzerland.svg">Wikimedia Commons</a> under <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.en">Creative Commons Attribution-Share Alike 3.0 Unported</a> license.</small>
+                          <small>Logo by <a class='no_decor' href="https://en.wikipedia.org/wiki/File:Flag-map_of_Switzerland.svg">Wikimedia Commons</a> under <a class='no_decor' href="https://creativecommons.org/licenses/by-sa/3.0/deed.en">Creative Commons Attribution-Share Alike 3.0 Unported</a> license.</small>
                         </div>
                       </div>
                       <div class="ui four wide column">
-                        <a href="https://factsmission.com/"><img style="max-height:80px;max-width:100%" src="https://factsmission.com/img/logo.svg"></a>
+                        <a class='no_decor' aria-hidden='true' href="https://factsmission.com/"><img style="max-height:80px;max-width:100%" src="https://factsmission.com/img/logo.svg"></a>
                       </div>
                     </div>
                   </div>
@@ -109,7 +118,7 @@
                   {
                     "@context": "http://schema.org",
                     "@type": "WebSite",
-                    "url": "https://localhost:5000",
+                    "url": "https://tlds-demo.factsmission.org",
                     "name": "ld.geo.admin.ch",
                     "creator": {
                       "@type": "Organization",
@@ -126,20 +135,6 @@
 <http://rdf2h.github.io/2015/rdf2h#type>
         <http://www.w3.org/2000/01/rdf-schema#Resource>
 ] .
-
-<genericHead> a r2h:Renderer;
-    r2h:type rdfs:Resource;
-    r2h:context gt:HtmlHead;
-    r2h:mustache """
-        {{{:render . gt:HtmlTitle}}}
-    """.
-
-<genericHtmlTitle> a r2h:Renderer;
-    r2h:type rdfs:Resource;
-    r2h:context gt:HtmlTitle;
-    r2h:mustache """
-        <title>Resource: {{.}}</title>
-    """.
 
 [ a r2h:Renderer ;
     r2h:type foaf:Organization ;
@@ -230,7 +225,7 @@
 
         <div class="item">
             <div class='scroll-x ui segment pseudo'>
-              <table class='ui celled table'><thead><tr><th colspan='2'>Other Properties</th></tr></thead><tbody class='fetch' resource="{{{.}}}" context="http://rdf2h.github.io/2016/generic-rdf2h-renderers/Card"></tbody></table>
+              <table class='ui celled table'><thead><tr><th colspan='2'>Other Properties</th></tr></thead><tbody>{{{:render . gt:Card}}}</tbody></table>
             </div>
         </div>
 
@@ -249,22 +244,22 @@
 
         {{#+rdf:seeAlso}}
           <div class="ui item">
-            <h3 class="ui header">
-              Neighboring Entities
-            </h3>
-            {{#rdf:seeAlso}}
-              <div class='fetch' resource="{{{.}}}" context="http://rdf2h.github.io/2016/generic-rdf2h-renderers/Neighbors"
-                graph='https://query.wikidata.org/sparql?query=construct%7B%0A%20%20%3C{{{.}}}%3E%20wdt%3AP47%20%3Fn.%0A%20%20%3Fn%20wdt%3AP771%20%3Fo.%0A%20%20%3Fn%20rdfs%3Alabel%20%3Foo.%0A%7D%0AWHERE%20%7B%0A%20%20%3C{{{.}}}%3E%20wdt%3AP47%20%3Fn.%0A%20%20OPTIONAL%20%7B%20%3Fn%20wdt%3AP771%20%3Fo.%20%7D%0A%20%20OPTIONAL%20%7B%0A%20%20%20%20%3Fn%20rdfs%3Alabel%20%3Foo.%0A%20%20%20%20FILTER%20%28lang%28%3Foo%29%20%3D%20"en"%29%0A%20%20%20%7D%0A%7D'>
-              </div>
-            {{/rdf:seeAlso}}
-          </div>
-          <div class="ui item">
-            <h3 class="ui header">
-              Images from wikimedia
-            </h3>
-            {{#rdf:seeAlso}}
-              <div class="fetch scroll-x ui segment pseudo imagegrid" resource="{{{.}}}" graph="https://query.wikidata.org/sparql?query=construct%7B%3C{{{.}}}%3E%20wdt%3AP94%20%3Fo%20.%0A%3C{{{.}}}%3E%20wdt%3AP18%20%3Foo%20.%0A%3C{{{.}}}%3E%20wdt%3AP242%20%3Fooo%20.%0A%7D%0Awhere%20%7B%0A%3C{{{.}}}%3E%20wdt%3AP94%20%3Fo%20.%0A%3C{{{.}}}%3E%20wdt%3AP18%20%3Foo%20.%0A%3C{{{.}}}%3E%20wdt%3AP242%20%3Fooo%20.%0A%7D" context="http://rdf2h.github.io/2015/rdf2h#wikidata"></div>
-            {{/rdf:seeAlso}}
+            <table class='ui celled table'>
+              <thead><tr><th colspan='2'>Neighboring Entities</th></tr></thead>
+              {{#rdf:seeAlso}}
+                <tbody class='fetch' resource="{{{.}}}" context="http://rdf2h.github.io/2016/generic-rdf2h-renderers/Neighbors"
+                  graph='https://query.wikidata.org/sparql?query=construct%7B%0A%20%20%3C{{{.}}}%3E%20wdt%3AP47%20%3Fn.%0A%20%20%3Fn%20wdt%3AP771%20%3Fo.%0A%20%20%3Fn%20rdfs%3Alabel%20%3Foo.%0A%7D%0AWHERE%20%7B%0A%20%20%3C{{{.}}}%3E%20wdt%3AP47%20%3Fn.%0A%20%20OPTIONAL%20%7B%20%3Fn%20wdt%3AP771%20%3Fo.%20%7D%0A%20%20OPTIONAL%20%7B%0A%20%20%20%20%3Fn%20rdfs%3Alabel%20%3Foo.%0A%20%20%20%20FILTER%20%28lang%28%3Foo%29%20%3D%20"en"%29%0A%20%20%20%7D%0A%7D'>
+                </tbody>
+              {{/rdf:seeAlso}}
+            </table>
+            </div>
+            <div class="ui item">
+              <h3 class="ui header">
+                Images from wikimedia
+              </h3>
+              {{#rdf:seeAlso}}
+                <div class="fetch scroll-x ui segment pseudo imagegrid" resource="{{{.}}}" graph="https://query.wikidata.org/sparql?query=construct%7B%3C{{{.}}}%3E%20wdt%3AP94%20%3Fo%20.%0A%3C{{{.}}}%3E%20wdt%3AP18%20%3Foo%20.%0A%3C{{{.}}}%3E%20wdt%3AP242%20%3Fooo%20.%0A%7D%0Awhere%20%7B%0A%3C{{{.}}}%3E%20wdt%3AP94%20%3Fo%20.%0A%3C{{{.}}}%3E%20wdt%3AP18%20%3Foo%20.%0A%3C{{{.}}}%3E%20wdt%3AP242%20%3Fooo%20.%0A%7D" context="http://rdf2h.github.io/2015/rdf2h#wikidata"></div>
+              {{/rdf:seeAlso}}
           </div>
         {{/+rdf:seeAlso}}
       </div>
@@ -304,13 +299,13 @@
     r2h:context r2h:wikidata ;
     r2h:mustache """{{@prefix wdt: <http://www.wikidata.org/prop/direct/>}}
     {{#wdt:P94}}
-	  <a href="{{.}}"><img src="{{.}}" alt="Coat Of Arm"></a>
+    <a class='no_decor' href="{{.}}"><img src="{{.}}" alt="Coat Of Arm"></a>
     {{/wdt:P94}}
     {{#wdt:P18}}
-	  <a href="{{.}}"><img src="{{.}}" alt="image"></a>
+    <a class='no_decor' href="{{.}}"><img src="{{.}}" alt="image"></a>
     {{/wdt:P18}}
     {{#wdt:P242}}
-	  <a href="{{.}}"><img src="{{.}}" alt="map"></a>
+    <a class='no_decor' href="{{.}}"><img src="{{.}}" alt="map"></a>
     {{/wdt:P242}}
     """
 ].
@@ -355,37 +350,6 @@
     r2h:type rdfs:Resource;
     r2h:context gt:Neighbors;
     r2h:javaScript """
-    let prefixMappings = [
-          {ns: "http://www.w3.org/1999/02/22-rdf-syntax-ns#", prefix: "rdf:"},
-          {ns: "http://www.w3.org/2004/02/skos/core#", prefix: "skos:"},
-          {ns: "http://www.w3.org/2002/07/owl#", prefix: "owl:"},
-          {ns: "http://www.w3.org/2000/01/rdf-schema#", prefix: "rdfs:"},
-          {ns: "http://schema.org/", prefix: "schema:"},
-          {ns: "https://gont.ch/", prefix: "gont:"},
-          {ns: "https://ld.geo.admin.ch/def/", prefix: "ch:"},
-          {ns: "http://www.opengis.net/ont/geosparql#", prefix: "geo:"},
-          {ns: "http://www.geonames.org/ontology#", prefix: "gn:"},
-          {ns: "http://dbpedia.org/resource/", prefix: "dbr:"},
-          {ns: "http://dbpedia.org/ontology/", prefix: "dbo:"},
-          {ns: "http://dbpedia.org/property/", prefix: "dbp:"},
-          {ns: "http://xmlns.com/foaf/0.1/", prefix: "foaf:"},
-          {ns: "http://www.wikidata.org/entity/", prefix: "wikidata:"},
-          {ns: "http://commons.wikimedia.org/wiki/", prefix: "wikimedia:"},
-          {ns: "http://purl.org/dc/terms/", prefix: "dc:"},
-          {ns: "http://usefulinc.com/ns/doap#", prefix: "doap:"},
-          {ns: window.location.origin + '/boundaries/municipality/geometry/', prefix: "Municipal geometry "},
-          {ns: window.location.origin + '/boundaries/municipality/', prefix: "Municipality "},
-          {ns: window.location.origin + '/boundaries/district/', prefix: "District "},
-          {ns: window.location.origin + '/boundaries/canton/', prefix: "Canton "},
-          {ns: window.location.origin + '/boundaries/country/', prefix: "Country "}
-        ];
-      function styleUri(uri) {
-          var mapping = prefixMappings.find(function(mappping) {
-            return uri.startsWith(mappping.ns);
-          });
-          if (mapping) return mapping.prefix+"<b>"+uri.substring(mapping.ns.length)+"</b>";
-          return uri;
-      }
       let result = '';
       let neighbors = n.out($rdf.namedNode('http://www.wikidata.org/prop/direct/P47'));
       neighbors.each(neighbor => {
@@ -492,7 +456,7 @@
     r2h:javaScript """
     let s = suffix => $rdf.sym("http://schema.org/"+suffix);
     let map = n.out(s("hasMap")).value.replace('https://map.geo.admin.ch/', 'https://map.geo.admin.ch/embed.html');
-    let iframe = `<iframe src='${map}' height='400' frameborder='0' style='width:100%;border:0'></iframe>`
+    let iframe = `<iframe src='${map}' height='400' frameborder='0' style='width:100%;border:0' title='Embedded map'></iframe>`
     print(iframe);
     """
 ].
