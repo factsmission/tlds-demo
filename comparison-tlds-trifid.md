@@ -26,7 +26,7 @@ We realize that we as the creators of TLDS are biased and despite our best inten
 | application/rdf+xml | yes | yes  |
 | text/turtle | yes | yes  |
 | application/n-triples | no (404) | yes 🏅 |
-| application/ld+json | yes 🏅 | no (500) |
+| application/ld+json | yes | yes |
 | text/html | yes | yes |
 
 <sup id="f1">[1](#f1)</sup> According to [web.dev](https://web.dev/), a service provided by Google. We've tested the rescources https://ld.geo.admin.ch/boundaries/canton/2:2019 and https://tlds-demo.factsmission.org/boundaries/canton/2:2019 respectively.
