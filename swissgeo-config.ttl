@@ -3,7 +3,7 @@
 
 <>
     slds:port 5000 ;
-    tlds:renderers ("https://rdf2h.github.io/renderers/0.0.4/fallback-renderers.ttl" "/renderers.ttl");
+    tlds:renderers ("https://rdf2h.github.io/renderers/0.0.5/fallback-renderers.ttl" "/renderers.ttl");
     slds:resourceDescriptionProvider [
         slds:javaClass "solutions.linked.slds.providers.FileResourceDescription";
         slds:resource <https://tlds-demo.factsmission.org/renderers>;
