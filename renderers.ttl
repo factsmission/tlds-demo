@@ -10,6 +10,7 @@
 @prefix opengis: <http://www.opengis.net/ont/geosparql#> .
 @prefix gtfs:	<http://vocab.gtfs.org/terms#> .
 @prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 [ a r2h:Renderer ;
     r2h:type doap:Project ;
@@ -210,7 +211,7 @@
           <div class="ui item"> 
             <p class="fetch" resource="{{{.}}}" 
                 graph="https://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=CONSTRUCT+%7B%3C{{{.}}}%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fabstract%3E+%3Fabstract%7D%0D%0AWHERE+%7B%0D%0A++%3Fs+%3Chttp%3A%2F%2Fwww.w3.org%2F2002%2F07%2Fowl%23sameAs%3E+%3C{{.}}%3E+.%0D%0A++%3Fs+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fabstract%3E+%3Fabstract+.%0D%0A%0D%0A++FILTER%28LANGMATCHES%28LANG%28%3Fabstract%29%2C+%27en%27%29%29%0D%0A%7D%0D%0A&format=text%2Fturtle&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on&run=+Run+Query+" 
-                context="http://rdf2h.github.io/2015/rdf2h#Abstract">
+                context='http://rdf2h.github.io/2015/rdf2h#Abstract'>
             </p>
           </div>
         {{/rdf:seeAlso}}
@@ -258,7 +259,7 @@
                 Images from wikimedia
               </h3>
               {{#rdf:seeAlso}}
-                <div class="fetch scroll-x ui segment pseudo imagegrid" resource="{{{.}}}" graph="https://query.wikidata.org/sparql?query=construct%7B%3C{{{.}}}%3E%20wdt%3AP94%20%3Fo%20.%0A%3C{{{.}}}%3E%20wdt%3AP18%20%3Foo%20.%0A%3C{{{.}}}%3E%20wdt%3AP242%20%3Fooo%20.%0A%7D%0Awhere%20%7B%0A%3C{{{.}}}%3E%20wdt%3AP94%20%3Fo%20.%0A%3C{{{.}}}%3E%20wdt%3AP18%20%3Foo%20.%0A%3C{{{.}}}%3E%20wdt%3AP242%20%3Fooo%20.%0A%7D" context="http://rdf2h.github.io/2015/rdf2h#wikidata"></div>
+                <div class="fetch scroll-x ui segment pseudo imagegrid" resource="{{{.}}}" graph="https://query.wikidata.org/sparql?query=construct%7B%3C{{{.}}}%3E%20wdt%3AP94%20%3Fo%20.%0A%3C{{{.}}}%3E%20wdt%3AP18%20%3Foo%20.%0A%3C{{{.}}}%3E%20wdt%3AP242%20%3Fooo%20.%0A%7D%0Awhere%20%7B%0A%3C{{{.}}}%3E%20wdt%3AP94%20%3Fo%20.%0A%3C{{{.}}}%3E%20wdt%3AP18%20%3Foo%20.%0A%3C{{{.}}}%3E%20wdt%3AP242%20%3Fooo%20.%0A%7D" context='http://rdf2h.github.io/2015/rdf2h#wikidata'></div>
               {{/rdf:seeAlso}}
           </div>
         {{/+rdf:seeAlso}}
@@ -281,6 +282,12 @@
     r2h:mustache """
 	  <a href="{{.}}">{{{.}}}</a>
     """
+].
+
+[ a r2h:Renderer ;
+    r2h:type xsdString ;
+    r2h:context gt:Link ;
+    r2h:mustache "{{{.}}}"
 ].
 
 [ a r2h:Renderer ;
@@ -338,7 +345,7 @@
     {{@prefix s: <http://schema.org/>}}
 
 
-	  <p><b>Lat-Long:</b>  <a href="https://www.openstreetmap.org/#map=15/{{{wgs:long}}}/{{{wgs:long}}}">{{{wgs:long}}},{{{wgs:long}}}</a></p>
+	  <p><b>Lat-Long:</b>  <a href='https://www.openstreetmap.org/#map=15/{{{wgs:long}}}/{{{wgs:long}}}''>{{{wgs:long}}},{{{wgs:long}}}</a></p>
     <p><b>Elevation: </b>{{{dbo:elevation}}}m</p>
     <p><b>Operating Point Type:</b>{{#geotra:operatingPointType}}{{{:render . gt:Link}}}{{/geotra:operatingPointType}}</p>
     <p><b>Contained in Place: </b>{{#s:containedInPlace}}{{{:render . gt:Link}}}{{/s:containedInPlace}}</p>
