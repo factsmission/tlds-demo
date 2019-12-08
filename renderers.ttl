@@ -285,7 +285,7 @@
 ].
 
 [ a r2h:Renderer ;
-    r2h:type xsd:String ;
+    r2h:type xsd:string ;
     r2h:context gt:Link ;
     r2h:mustache "{{{.}}}"
 ].
